@@ -1,20 +1,22 @@
 [tool.poetry]
-name = "iskcon-backend"
+name = "temple-web"
 version = "0.1.0"
 description = ""
 authors = ["aahnik <daw@aahnik.dev>"]
 readme = "README.md"
-packages = [{include = "iskcon_backend"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 django = "^4.2.1"
+django-solo = "^2.1.0"
+django-json-widget = "^1.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.270"
 isort = "^5.12.0"
 black = "^23.3.0"
+ipykernel = "^6.23.1"
 
 [build-system]
 requires = ["poetry-core"]
