@@ -6,20 +6,32 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 
 
-class NavLink(models.Model):
+class Link(models.Model):
+    title = models.CharField(max_length=256)
+    link = models.CharField(max_length=1024, default="/")
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class NavLink(Link):
     home_config = models.ForeignKey("HomeConfig", on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    link = models.CharField(max_length=100, default="")
 
     def save(self, *args, **kwargs):
         if NavLink.objects.count() >= 7:
             raise ValidationError("Maximum number of instances of NavLink reached.")
         super().save(*args, **kwargs)
 
-    def __str__(self) -> str:
-        return self.title
+
+class FooterLinkCateg(models.Model):
+    home_config = models.ForeignKey("HomeConfig", on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
 
 
+class FooterLink(Link):
+    footer_link_categ = models.ForeignKey(
+        "FooterLinkCateg", on_delete=models.CASCADE
+    )
 
 
 class HomeConfig(SingletonModel):
