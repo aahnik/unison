@@ -5,6 +5,11 @@
 <!-- content -->
 {% block content %}
 
+<!--  -->
+{% for image in images %}
+<img src="{{ image.test_image.url }}" alt="My Image" />
+{% endfor %}
+
 <div class="px-12 py-4">
   <div
     id="default-carousel"

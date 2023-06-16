@@ -1,9 +1,23 @@
+import os
+from datetime import datetime
+
+from django.core.exceptions import ValidationError
 from django.db import models
 from solo.models import SingletonModel
-from django.core.exceptions import ValidationError
-
 
 # Create your models here.
+
+
+
+def upload_to(instance, filename):
+    # Get the file extension
+    ext = os.path.splitext(filename)[1]
+    # Generate a timestamp
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    # Create the filename with the timestamp
+    new_filename = f"{timestamp}{ext}"
+    # Return the path relative to MEDIA_ROOT
+    return os.path.join("images", new_filename)
 
 
 class Link(models.Model):
@@ -12,6 +26,10 @@ class Link(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Image(models.Model):
+    test_image = models.ImageField(upload_to=upload_to)
 
 
 class NavLink(Link):
@@ -25,17 +43,18 @@ class NavLink(Link):
 
 class FooterLinkCateg(models.Model):
     home_config = models.ForeignKey("HomeConfig", on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    categ_title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.categ_title
 
 
 class FooterLink(Link):
-    footer_link_categ = models.ForeignKey(
-        "FooterLinkCateg", on_delete=models.CASCADE
-    )
+    footer_link_categ = models.ForeignKey("FooterLinkCateg", on_delete=models.CASCADE)
 
 
 class HomeConfig(SingletonModel):
-    site_name = models.CharField(max_length=255, default="Site Name")
+    site_name = models.CharField(max_length=255, default="Temple Web")
     maintenance_mode = models.BooleanField(default=False)
     map_embed_url = models.CharField(max_length=5000, default="helllo")
 

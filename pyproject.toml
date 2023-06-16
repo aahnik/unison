@@ -10,6 +10,7 @@ python = "^3.11"
 django = "^4.2.1"
 django-solo = "^2.1.0"
 django-json-widget = "^1.1.1"
+pillow = "^9.5.0"
 
 
 [tool.poetry.group.dev.dependencies]

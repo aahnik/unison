@@ -76,7 +76,7 @@
 <footer class="p-4 bg-gray-200 sm:p-6 dark:bg-gray-800">
   <div class="mx-auto">
     <div class="md:flex md:justify-between">
-      <div class="mb-6 md:mb-0">
+      <div class="mb-6 md:mb-0 px-12">
         <a href="" class="flex items-center">
           <img
             src="https://www.iskconcommunications.org/joomlatools-files/docman-images/iskcon_logo.jpg"
@@ -90,9 +90,29 @@
         </a>
       </div>
       <div
-        class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+        class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
       >
-        <div>
+        {% for category in footer_categories %}
+        <div class="px-6">
+          <h2
+            class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
+          >
+            {{ category.categ_title }}
+          </h2>
+          <ul class="text-gray-600 dark:text-gray-400">
+            {% for link in category.footerlink_set.all %}
+            <li class="mb-4">
+              <a href="{{ link.link }}" class="hover:underline"
+                >{{ link.title }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        {% endfor %}
+
+        <!-- <div>
           <h2
             class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white"
           >
@@ -156,7 +176,7 @@
               <a href="#" class="hover:underline">Terms &amp; Conditions</a>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
     <hr class="my-6 border-gray-300 sm:mx-auto dark:border-gray-700 lg:my-8" />

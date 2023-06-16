@@ -1,8 +1,8 @@
+from django import forms
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
-from .models import HomeConfig, NavLink
 
-from django import forms
+from .models import FooterLink, FooterLinkCateg, HomeConfig, Image, NavLink
 
 
 class NavLinkForm(forms.ModelForm):
@@ -22,3 +22,21 @@ class NavLinkInline(admin.StackedInline):
 @admin.register(HomeConfig)
 class HomeConfigAdmin(SingletonModelAdmin):
     inlines = [NavLinkInline]
+
+
+class FooterLinkInline(admin.StackedInline):
+    model = FooterLink
+    extra = 1
+
+
+@admin.register(FooterLinkCateg)
+class FooterLinkCategAdmin(admin.ModelAdmin):
+    inlines = [FooterLinkInline]
+
+
+# @admin.register(FooterLink)
+# class FooterLinkAdmin(admin.ModelAdmin):
+#     pass
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ["id", "test_image"]
