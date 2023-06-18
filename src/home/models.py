@@ -52,8 +52,18 @@ class FooterLink(Link):
     footer_link_categ = models.ForeignKey("FooterLinkCateg", on_delete=models.CASCADE)
 
 
+class CallToAction(models.Model):
+    # cta sections in home page
+    home_content = models.ForeignKey("HomeContent", on_delete=models.CASCADE)
+    title = models.CharField(max_length=256, default = "Call to Action Card")
+    description = models.CharField(max_length=1024)
+    button_text = models.CharField(max_length=32)
+    
+
+
 class HomeContent(SingletonModel):
     map_embed_url = models.CharField(max_length=5000, default="helllo")
+
 
 
 class HomeConfig(SingletonModel):

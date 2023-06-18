@@ -21,7 +21,11 @@ def donation_failure_page(request):
 
 
 def payment_gateway_callback_handler(request):
-    # handle the request made by payment gateway after user has done payment
+    # handle the redirect made by payment gateway after user has done payment
+    # check if the payment succeeded, and upate in db
+    # display a loading page
+    # and then show success or failure
+    # if success, then give option to print receipt
     pass
 
 
@@ -30,6 +34,11 @@ def make_donation(request):
         form = DonationForm(request.POST)
         if form.is_valid():
             form.save()
+            # make api call
+
+
+
+            # redirect to payment page
             return redirect("donations:donation_success_page")
         else:
             print(form.errors)

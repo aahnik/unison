@@ -38,6 +38,13 @@ class DonationReceived(models.Model):
     address = models.TextField(max_length=4096)
     payment_date_time = models.DateTimeField(auto_now_add=True)
 
+    PAYMENT_STATUS_CHOICES = ["pending", "success", "failure"]
+    payment_status = models.CharField(
+        max_length=10,
+        choices=[(choice, choice.capitalize()) for choice in PAYMENT_STATUS_CHOICES],
+        default="pending",
+    )
+
     def __str__(self):
         return f"{self.name} donated {self.amount} at {str(self.payment_date_time)}"
 
