@@ -2,6 +2,8 @@
 
 A modern and dynamic website for temple communities.
 
+[![Code style: djLint](https://img.shields.io/badge/html%20style-djLint-blue.svg)](https://github.com/Riverside-Healthcare/djlint)
+
 ## Features
 
 - Robust admin panel to customize every aspect of the web page

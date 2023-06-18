@@ -2,7 +2,14 @@ from django import forms
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
-from .models import FooterLink, FooterLinkCateg, HomeConfig, Image, NavLink
+from .models import (
+    FooterLink,
+    FooterLinkCateg,
+    HomeConfig,
+    NavLink,
+    CarouselImage,
+    GalleryImage,
+)
 
 
 class NavLinkForm(forms.ModelForm):
@@ -37,6 +44,11 @@ class FooterLinkCategAdmin(admin.ModelAdmin):
 # @admin.register(FooterLink)
 # class FooterLinkAdmin(admin.ModelAdmin):
 #     pass
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    list_display = ["id", "test_image"]
+@admin.register(CarouselImage)
+class CarouselImageAdmin(admin.ModelAdmin):
+    list_display = ["id", "alt_text", "image", "redirect_url"]
+
+
+@admin.register(GalleryImage)
+class GalleryImageAdmin(admin.ModelAdmin):
+    list_display = ["id", "alt_text", "image", "redirect_url"]

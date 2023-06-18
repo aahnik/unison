@@ -11,6 +11,8 @@ django = "^4.2.1"
 django-solo = "^2.1.0"
 django-json-widget = "^1.1.1"
 pillow = "^9.5.0"
+requests = "^2.31.0"
+djlint = "^1.31.0"
 
 
 [tool.poetry.group.dev.dependencies]

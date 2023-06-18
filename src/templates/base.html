@@ -13,11 +13,20 @@
     <!-- place for navbar -->
     {% block navbar %} {% endblock %}
 
-    <!-- place for actual page content -->
-    {% block content %} {% endblock %}
+    <div
+      id="footer-bottomer"
+      class="flex flex-col min-h-screen justify-between"
+    >
+      <!--  -->
+      <!-- this div wraps the content and the footer -->
+      <!-- place for actual page content -->
+      <!-- place for actual page content -->
+      <div id="content">{% block content %} {% endblock %}</div>
 
-    <!-- place for footer -->
-    {% block footer %} {% endblock%}
+      <!-- <div class="grow"></div> -->
+      <!-- place for footer -->
+      {% block footer %} {% endblock%}
+    </div>
 
     <script src="{% static 'flowbite.min.js' %}"></script>
   </body>

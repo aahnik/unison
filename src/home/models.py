@@ -1,23 +1,18 @@
-import os
-from datetime import datetime
-
 from django.core.exceptions import ValidationError
 from django.db import models
 from solo.models import SingletonModel
+from utils.images import upload_image_to
 
 # Create your models here.
 
 
+class ModelImage(models.Model):
+    alt_text = models.CharField(max_length=512)
+    redirect_url = models.URLField()
+    image = models.ImageField(upload_to=upload_image_to)
 
-def upload_to(instance, filename):
-    # Get the file extension
-    ext = os.path.splitext(filename)[1]
-    # Generate a timestamp
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    # Create the filename with the timestamp
-    new_filename = f"{timestamp}{ext}"
-    # Return the path relative to MEDIA_ROOT
-    return os.path.join("images", new_filename)
+    def __str__(self):
+        return self.alt_text
 
 
 class Link(models.Model):
@@ -28,8 +23,12 @@ class Link(models.Model):
         return self.title
 
 
-class Image(models.Model):
-    test_image = models.ImageField(upload_to=upload_to)
+class CarouselImage(ModelImage):
+    pass
+
+
+class GalleryImage(ModelImage):
+    pass
 
 
 class NavLink(Link):
@@ -53,18 +52,17 @@ class FooterLink(Link):
     footer_link_categ = models.ForeignKey("FooterLinkCateg", on_delete=models.CASCADE)
 
 
+class HomeContent(SingletonModel):
+    map_embed_url = models.CharField(max_length=5000, default="helllo")
+
+
 class HomeConfig(SingletonModel):
     site_name = models.CharField(max_length=255, default="Temple Web")
     maintenance_mode = models.BooleanField(default=False)
-    map_embed_url = models.CharField(max_length=5000, default="helllo")
+    # seperate out map embed url from home config
+    # home config is shared across all templates via context processors
+    favicon = models.ImageField(upload_to=upload_image_to)
+    logo = models.ImageField(upload_to=upload_image_to)
 
     def __str__(self):
         return self.site_name + " Config"
-
-
-class HomeCarousel(models.Model):
-    pass
-
-
-class HomeGallery(models.Model):
-    pass

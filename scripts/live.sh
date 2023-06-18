@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # run tailwindcss in the background
-# redirect stdout and stderr to tailwind.logs
-npm run dev > tailwind.logs 2>&1 &
-
+npm run dev &
 
 # activate the virtual environment
 source .venv/bin/activate

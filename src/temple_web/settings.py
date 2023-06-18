@@ -32,7 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # core django apps
-    "django.contrib.admin",
+    # "django.contrib.admin",
+    "temple_web.apps.TempleWebAdminConfig",
+    # use a custom admin site instance
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     "solo.apps.SoloAppConfig",
     # our custom apps
     "home.apps.HomeConfig",
+    "donations.apps.DonationsConfig",
 ]
 
 MIDDLEWARE = [
@@ -67,6 +70,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "home.context_processors.site_ctx",
             ],
         },
     },
