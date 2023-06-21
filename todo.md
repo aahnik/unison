@@ -35,3 +35,8 @@
 
 <!-- ideas  -->
 - [ ] donation form should have a thumbnail based on the tier
+- [ ] contact details in footer, and error pages
+- [ ] remove hardcoded urls
+
+
+https://41c1-223-29-193-64.ngrok-free.app/donations/payment-status/?client_txn_id=TempleWebPay-2023-06-21-c3c45107-0d50-4655-bda0-28a27807e884&txn_id=52332822

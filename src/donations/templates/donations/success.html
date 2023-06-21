@@ -1,1 +1,35 @@
-success
+{% extends "base.html" %}
+<!-- title -->
+{% block title %} Payment Successful {% endblock title %}
+
+<!-- content -->
+{% block content %}
+<div
+  class="text-center p-4 mb-4 text-lg text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+  role="alert"
+>
+  <i class="fa-regular fa-circle-check fa-3x" style="color: #3b7104"></i>
+
+  <div class="font-extrabold py-6 text-xl">
+    Payment of ₹ {{ donation_recvd.amount }} Successful!
+  </div>
+
+  <br />
+  Name: {{ donation_recvd.name }}
+  <br />
+  WhatsApp Number: {{ donation_recvd.whatsapp_number }}
+  <br />
+  Donation Tier: {{ donation_recvd.donation_tier}} Paid From: aahnik@upi
+  <br />
+  Payment Datetime: {{ donation_recvd.payment_datetime }}
+  <br />
+  Payor VPA: {{ donation_recvd.customer_vpa }}
+
+  <br />
+  UPI Transanction ID: {{ donation_recvd.upi_transaction_id }}
+  <br />
+  Payee Name: {{ donation_recvd.merchant_name }}
+  <br />
+  Payee UPI ID: {{ donation_recvd.merchant_upi_id }}
+</div>
+{% endblock content %}

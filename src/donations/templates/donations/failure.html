@@ -1,1 +1,20 @@
-failure
+{% extends "base.html" %}
+<!-- title -->
+{% block title %} Payment Failed {% endblock title %}
+
+<!-- content -->
+{% block content %}
+<div
+  class="p-4 mb-4 text-lg text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 text-center"
+  role="alert"
+>
+  <i class="fa-regular fa-circle-xmark fa-3x" style="color: #bd1705"></i>
+
+  <div class="font-extrabold py-6 text-xl">Payment Failed!</div>
+  Remark: {{ remark }}
+  <br />
+  If you think this is a mistake, please contact the admins of this
+  site.
+  <br />
+</div>
+{% endblock content %}

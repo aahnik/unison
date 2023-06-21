@@ -45,11 +45,22 @@ class DonationReceived(models.Model):
         default="pending",
     )
 
+    # details received from gateway
+    order_id = models.CharField(max_length=20, blank=True, null=True)
+    client_txn_id = models.CharField(max_length=128, unique=True,db_index=True)
+
+    customer_vpa = models.CharField(max_length=128, blank=True, null=True)
+    remark = models.CharField(max_length=512, blank=True, null=True)
+    upi_tranaction_id = models.CharField(max_length=128, blank=True, null=True)
+    merchant_name = models.CharField(max_length=128, blank=True, null=True)
+    merchant_upi_id = models.CharField(max_length=128, blank=True, null=True)
+
     def __str__(self):
         return f"{self.name} donated {self.amount} at {str(self.payment_date_time)}"
 
     def clean(self):
         super().clean()
+        # in case of preselecting donation tier, this line is giving error
         donation_tier_amt = DonationTier.objects.get(id=self.donation_tier.pk).amount
         if self.amount < donation_tier_amt:
             raise ValidationError(

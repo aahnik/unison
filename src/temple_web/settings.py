@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from .myconfig import MyDjangoSettings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,15 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jl_6hmu2+rft+*5sd&zy!-l(x0oz@hng97ua!h!y)qe7)y_*^0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = MyDjangoSettings.DEBUG
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app"]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
-    "https://5545-223-29-193-12.ngrok-free.app/",
+    "https://*.ngrok-free.app/",
 ]
 
-# Application definition
+# Application dek,finition
 
 INSTALLED_APPS = [
     # core django apps
