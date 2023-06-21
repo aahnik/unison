@@ -26,3 +26,5 @@ urlpatterns = [
     path("donations/", include("donations.urls")),
     path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = "temple_web.views.page_not_found_view"
