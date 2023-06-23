@@ -65,7 +65,7 @@ def create_order(
     if response.status_code == 200:
         rj = response.json()
         if rj["status"] is True:
-            return True,rj["data"]
+            return True, rj["data"]
         else:
             logger.warning("Failed to create order \n%s", response.text)
             return False, response
@@ -73,8 +73,7 @@ def create_order(
         logger.warning(
             "Payment Gateway create_order returned non 200 code \n %s", response.text
         )
-
-    return False,response
+        return False, response
 
 
 def check_order_status(client_txn_id: str, txn_date: date = None):
