@@ -15,16 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
+from django.conf.urls import handler404
+
+
 # from django.contrib import admin
 from .admin import admin
 from django.urls import include, path
-
+from temple_web import views
 from . import settings
+from . import views
 
-urlpatterns = [
-    path("", include("home.urls")),
-    path("donations/", include("donations.urls")),
-    path("admin/", admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# from django.views.defaults import handler404
+handler404 = views.page_not_found_view
 
-handler404 = "temple_web.views.page_not_found_view"
+urlpatterns = (
+    [
+        path("", include("home.urls")),
+        path("donations/", include("donations.urls")),
+        # path("404/", views.page_not_found_view, name="404"),
+        path("admin/", admin.site.urls),
+    ]
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)
