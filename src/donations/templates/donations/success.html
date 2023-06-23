@@ -13,23 +13,26 @@
   <div class="font-extrabold py-6 text-xl">
     Payment of ₹ {{ donation_recvd.amount }} Successful!
   </div>
+  <div class="text-justify">
+    <br />
+    Name: {{ donation_recvd.name }}
+    <br />
+    WhatsApp Number: {{ donation_recvd.whatsapp_number }}
+    <br />
+    Donation Tier: {{ donation_recvd.donation_tier}}
+    <br />
+    Paid From: aahnik@upi
+    <br />
+    Payment Datetime: {{ donation_recvd.payment_date_time }}
+    <br />
+    Payor VPA: {{ donation_recvd.customer_vpa }}
 
-  <br />
-  Name: {{ donation_recvd.name }}
-  <br />
-  WhatsApp Number: {{ donation_recvd.whatsapp_number }}
-  <br />
-  Donation Tier: {{ donation_recvd.donation_tier}} Paid From: aahnik@upi
-  <br />
-  Payment Datetime: {{ donation_recvd.payment_datetime }}
-  <br />
-  Payor VPA: {{ donation_recvd.customer_vpa }}
-
-  <br />
-  UPI Transanction ID: {{ donation_recvd.upi_transaction_id }}
-  <br />
-  Payee Name: {{ donation_recvd.merchant_name }}
-  <br />
-  Payee UPI ID: {{ donation_recvd.merchant_upi_id }}
+    <br />
+    UPI Transaction ID: {{ donation_recvd.upi_transaction_id }}
+    <br />
+    Payee Name: {{ donation_recvd.merchant_name }}
+    <br />
+    Payee UPI ID: {{ donation_recvd.merchant_upi_id }}
+  </div>
 </div>
 {% endblock content %}
