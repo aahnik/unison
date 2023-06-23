@@ -47,11 +47,11 @@ class DonationReceived(models.Model):
 
     # details received from gateway
     order_id = models.CharField(max_length=20, blank=True, null=True)
-    client_txn_id = models.CharField(max_length=128, unique=True,db_index=True)
+    client_txn_id = models.CharField(max_length=128, unique=True, db_index=True)
 
     customer_vpa = models.CharField(max_length=128, blank=True, null=True)
     remark = models.CharField(max_length=512, blank=True, null=True)
-    upi_tranaction_id = models.CharField(max_length=128, blank=True, null=True)
+    upi_transaction_id = models.CharField(max_length=128, blank=True, null=True)
     merchant_name = models.CharField(max_length=128, blank=True, null=True)
     merchant_upi_id = models.CharField(max_length=128, blank=True, null=True)
 
@@ -65,4 +65,12 @@ class DonationReceived(models.Model):
         if self.amount < donation_tier_amt:
             raise ValidationError(
                 "Donation amount cannot be less than donation tier amount"
+            )
+        if len(self.whatsapp_number) != 10:
+            raise ValidationError(
+                "WhatsApp Number must be 10 digit Indian Phone Number"
+            )
+        if not self.whatsapp_number.isnumeric():
+            raise ValidationError(
+                "Not a valid WhatsApp Number. Must contain only 0-9 digits."
             )
