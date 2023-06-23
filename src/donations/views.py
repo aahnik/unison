@@ -7,11 +7,11 @@ from temple_web.myconfig import PaymentGatewayConfig
 from .upi_gateway import create_order, check_order_status
 from uuid import uuid4
 from datetime import date
-
+from utils.adirect import adirect
 from django.http import HttpRequest, Http404
 
 # Create your views here.
-
+from urllib.parse import urlencode
 
 import logging
 
@@ -27,7 +27,8 @@ def donations(request):
 
 def success_page(request):
     client_txn_id = request.GET.get("client_txn_id")
-    # TODO: what is get returns nothing
+    print(client_txn_id)
+
     try:
         donation_recvd = DonationReceived.objects.get(client_txn_id=client_txn_id)
     except DonationReceived.DoesNotExist:
@@ -43,6 +44,7 @@ def success_page(request):
 
 def failure_page(request):
     remark = request.GET.get("remark")
+    logging.error("error page called with %s", remark)
     context = {"remark": remark}
     return render(request, "donations/failure.html", context=context)
 
@@ -81,21 +83,22 @@ def payment_status(request):
                 donation_recvd.merchant_upi_id = resp["Merchant"]["upi_id"]
                 donation_recvd.save()
                 # save back to db, and redirect to success page
-                return redirect(
-                    reverse("donations:success_page"),
+                return adirect(
+                    "donations:success_page",
                     client_txn_id=donation_recvd.client_txn_id,
                 )
 
             else:
                 donation_recvd.save()
                 logger.warning("Payment failed! %s", resp["remark"])
-                return redirect(
-                    reverse("donations:failure_page"), remark=resp["remark"]
-                )
+                # return redirect(
+                #     reverse("donations:failure_page"), remark=resp["remark"]
+                # )
+                return adirect("donations:failure_page", remark=resp["remark"])
         else:
             logging.warning("Could not check order status!")
-            return redirect(
-                reverse("donations:failure_page"),
+            return adirect(
+                "donations:failure_page",
                 remark=f"Payment Gateway {PaymentGatewayConfig.CHECK_ORDER_STATUS} refused to connect",
             )
 
@@ -103,8 +106,8 @@ def payment_status(request):
         logger.warning(
             "Integrity Error! order_id fetched from db for client_txn_id does not match order_id returned by UPI Gateway"
         )
-        return redirect(
-            reverse("donations:failure_page"),
+        return adirect(
+            "donations:failure_page",
             remark="Order IDs dont match. Integrity Error!",
         )
 
@@ -141,7 +144,8 @@ def make_donation(request: HttpRequest):
                 # refused to connect
                 # try again
                 # if persists, contact admins
-                return redirect(reverse("donations:failure_page"), remark=api_resp.text)
+                return adirect("donations:failure_page", remark=api_resp.text)
+
             # TODO: getting a remark None here
 
             else:
