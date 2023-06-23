@@ -37,6 +37,8 @@
 - [ ] donation form should have a thumbnail based on the tier
 - [ ] contact details in footer, and error pages
 - [ ] remove hardcoded urls
-
+- [ ] upigateway docstring not in sync with actual return type
 
 https://41c1-223-29-193-64.ngrok-free.app/donations/payment-status/?client_txn_id=TempleWebPay-2023-06-21-c3c45107-0d50-4655-bda0-28a27807e884&txn_id=52332822
+
+https://a050-103-76-82-149.ngrok-free.app/donations/success/?client_txn_id=TempleWebPay-2023-06-23-769e0d47-66b3-4a40-ad23-a7abe0e60d44

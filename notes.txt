@@ -1,0 +1,5 @@
+
+## Notes for Admins
+
+- there should be atleast 2 carousel images
+- carousel image size:
