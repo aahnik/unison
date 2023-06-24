@@ -121,7 +121,7 @@
             {% endif %}
           >
             {% for choice in form.donation_tier.field.choices %}
-            <option value="{{ choice.0 }}" {% if choice.0 == form.initial.donation_tier %}selected {% else %} disabled {% endif %}>{{ choice.1 }}</option>
+            <option value="{{ choice.0 }}" {% if choice.0 == form.initial.donation_tier or choice.0 == form.donation_tier.value|add:"0" %}selected {% elif form.initial.donation_tier or form.donation_tier.value  %} disabled {% endif %}>{{ choice.1 }}</option>
             {% endfor %}
           </select>
         </div>
