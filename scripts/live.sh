@@ -7,7 +7,7 @@ npm run dev &
 source .venv/bin/activate
 
 # move into django project source directory which contains manage.py
-cd src
+cd temple-web
 
 # do the migrations
 python manage.py makemigrations

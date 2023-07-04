@@ -12,7 +12,7 @@ exit
 # delete all existing migrations
 
 
-cd src
+cd temple-web
 
 find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 

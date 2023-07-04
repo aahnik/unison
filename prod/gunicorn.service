@@ -7,7 +7,7 @@ After=network.target
 [Service]
 User=aahnik
 Group=www-data
-WorkingDirectory=path/to/proj/src
+WorkingDirectory=path/to/proj/temple-web
 ExecStart=path/to/proj/.venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \

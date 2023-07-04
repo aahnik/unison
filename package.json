@@ -4,8 +4,8 @@
   "description": "",
   "main": "tailwind.config.js",
   "scripts": {
-    "build": "npx tailwindcss -i src/static/input.css -o src/static/styles.css",
-    "dev": "npx tailwindcss -i src/static/input.css -o src/static/styles.css --watch"
+    "build": "npx tailwindcss -i temple-web/static/input.css -o temple-web/static/styles.css",
+    "dev": "npx tailwindcss -i temple-web/static/input.css -o temple-web/static/styles.css --watch"
   },
   "author": "",
   "license": "ISC",
