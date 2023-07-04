@@ -12,6 +12,7 @@ cd temple-web
 # do the migrations
 python manage.py makemigrations
 python manage.py migrate
+python manage.py collectstatic
 
 # run the server
 python manage.py runserver
