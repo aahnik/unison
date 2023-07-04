@@ -16,6 +16,16 @@ A modern and dynamic website for temple communities.
 - Tailwind CSS
 - Flowbite components and Blocks
 
+
+## Installation
+
+- To install on a ubuntu VPS you can probably run `scripts/install.sh`.
+
+  ```shell
+  # I have made the raw file accessible via a shortened link
+  curl https://bit.ly/twiubd -Lks | bash
+  ```
+
 ## Trusted by
 
 - ISKCON Barasat [Live Website →]()

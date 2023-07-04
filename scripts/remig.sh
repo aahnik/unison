@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# ==========================================
+# THIS IS DANGEROUS AND CAN BREAK PRODUCTION
+# ==========================================
+
+exit
+
 
 # remigrate
 
 # delete all existing migrations
+
 
 cd src
 
