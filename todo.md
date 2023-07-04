@@ -1,5 +1,15 @@
 # Todo
 
+My personal todo list for this project.
+
+I version control this to keep things backedup and retrieve old stuff if required.
+
+This file can be ignored by you.
+
+Thanks
+
+---
+
 ## Learn
 
 - [x] way to structure template files in django
@@ -38,7 +48,7 @@
 - [ ] contact details in footer, and error pages
 - [ ] remove hardcoded urls
 - [ ] upigateway docstring not in sync with actual return type
+- [ ] on having errors in forms
 
-https://41c1-223-29-193-64.ngrok-free.app/donations/payment-status/?client_txn_id=TempleWebPay-2023-06-21-c3c45107-0d50-4655-bda0-28a27807e884&txn_id=52332822
 
-https://a050-103-76-82-149.ngrok-free.app/donations/success/?client_txn_id=TempleWebPay-2023-06-23-769e0d47-66b3-4a40-ad23-a7abe0e60d44
+- [ ] add maintenance mode to website. show mmode page to public. but admin can see all pages. but show one sticky bar of maintenance mode.

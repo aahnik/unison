@@ -1,5 +1,17 @@
+=======================
+MY PERSONAL SCRATCH PAD
+=======================
 
-## Notes for Admins
+I version control this to keep things backedup and retrieve old notes if required. This file can be ignored by you.
+
+Thanks
+
+=======================
+***********************
+
+Notes for Admins
 
 - there should be atleast 2 carousel images
 - carousel image size:
+
+gunicorn --bind 0.0.0.0:8000 temple_web.wsgi
