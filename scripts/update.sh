@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git fetch && git pull
 
 rm -rf .venv
