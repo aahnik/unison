@@ -26,6 +26,11 @@ A modern and dynamic website for temple communities.
   curl https://bit.ly/twiubd -Lks | bash
   ```
 
+## Note
+
+- In addition to turning Debug=False, you also need to set Prod=True in the env vars
+
+
 ## Trusted by
 
 - ISKCON Barasat [Live Website →]()

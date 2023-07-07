@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .myconfig import MyDjangoSettings
+from .myconfig import MyDjangoSettings as MyDjS
+
+import logging
+
+log = logging.getLogger(__name__)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-jl_6hmu2+rft+*5sd&zy!-l(x0oz@hng97ua!h!y)qe7)y_*^0"
+SECRET_KEY = MyDjS.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = MyDjangoSettings.DEBUG
+DEBUG = MyDjS.DEBUG
+
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
 CSRF_TRUSTED_ORIGINS = [
@@ -133,10 +138,21 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"
+
+FILES_BASE = Path(MyDjS.PROD_FILES_ROOT) / MyDjS.PROD_DOMAIN
+
+if MyDjS.PROD:
+    STATIC_ROOT = FILES_BASE / "static"
+
+else:
+    STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR.parent / "local-cdn" / "media"
+
+if MyDjS.PROD:
+    MEDIA_ROOT = FILES_BASE / "media"
+else:
+    MEDIA_ROOT = BASE_DIR.parent / "local-cdn" / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

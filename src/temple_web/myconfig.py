@@ -28,8 +28,11 @@ class PaymentGatewayConfig:
 
 class MyDjangoSettings:
     DEBUG = config("DEBUG", default=False, cast=bool)
+    PROD = config("PROD", default=False, cast=bool)
+    PROD_FILES_ROOT = config("PROD_FILES_ROOT", default="/var/www/", cast=str)
+    PROD_DOMAIN = config("PROD_DOMAIN", cast=str)
+    SECRET_KEY = config("SECRET_KEY", cast=str)
 
 
 # print(metadata())
 # TODO: get project version from pyproject.toml
-
