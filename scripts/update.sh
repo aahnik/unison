@@ -5,7 +5,7 @@ source ~/.bash_aliases
 
 git fetch && git pull
 
-echo "Do you want to create a fresh virtual environment ?"
+echo "Do you want to create a fresh virtual environment ? y or anything else"
 read -r fresh
 
 if [ "$fresh" == "y" ]; then
