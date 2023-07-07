@@ -1,2 +1,2 @@
 *.html linguist-language=django
-temple-web/static/** linguist-vendored
+src/static/** linguist-vendored
