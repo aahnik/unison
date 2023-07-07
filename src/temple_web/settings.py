@@ -37,6 +37,10 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.ngrok-free.app/",
 ]
 
+if MyDjS.PROD:
+    ALLOWED_HOSTS.append(f".{MyDjS.PROD_DOMAIN}")
+    CSRF_TRUSTED_ORIGINS.append(f"https://*.{MyDjS.PROD_DOMAIN}")
+
 # Application dek,finition
 
 INSTALLED_APPS = [
