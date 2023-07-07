@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 import logging
 
-logger = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 
 def create_order(
@@ -67,10 +67,10 @@ def create_order(
         if rj["status"] is True:
             return True, rj["data"]
         else:
-            logger.warning("Failed to create order \n%s", response.text)
+            log.warning("Failed to create order \n%s", response.text)
             return False, response
     else:
-        logger.warning(
+        log.warning(
             "Payment Gateway create_order returned non 200 code \n %s", response.text
         )
         return False, response
@@ -132,9 +132,9 @@ def check_order_status(client_txn_id: str, txn_date: date = None):
         if rj["status"] is True:
             return rj["data"]
         else:
-            logger.warning("Failed to find transanction \n%s", response.text)
+            log.warning("Failed to find transanction \n%s", response.text)
     else:
-        logger.warning(
+        log.warning(
             "Payment Gateway check_order_status returned non 200 code \n %s",
             response.text,
         )

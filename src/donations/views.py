@@ -15,7 +15,7 @@ from urllib.parse import urlencode
 
 import logging
 
-logger = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 
 def donations(request):
@@ -32,7 +32,7 @@ def success_page(request):
     try:
         donation_recvd = DonationReceived.objects.get(client_txn_id=client_txn_id)
     except DonationReceived.DoesNotExist:
-        logger.error("Client txn id does not exist in db")
+        log.error("Client txn id does not exist in db")
         raise Http404("client_txn_id does not exist in database")
     if donation_recvd.payment_status == "success":
         context = {"donation_recvd": donation_recvd}
@@ -44,7 +44,7 @@ def success_page(request):
 
 def failure_page(request):
     remark = request.GET.get("remark")
-    logging.error("error page called with %s", remark)
+    log.error("error page called with %s", remark)
     context = {"remark": remark}
     return render(request, "donations/failure.html", context=context)
 
@@ -90,20 +90,20 @@ def payment_status(request):
 
             else:
                 donation_recvd.save()
-                logger.warning("Payment failed! %s", resp["remark"])
+                log.warning("Payment failed! %s", resp["remark"])
                 # return redirect(
                 #     reverse("donations:failure_page"), remark=resp["remark"]
                 # )
                 return adirect("donations:failure_page", remark=resp["remark"])
         else:
-            logging.warning("Could not check order status!")
+            log.warning("Could not check order status!")
             return adirect(
                 "donations:failure_page",
                 remark=f"Payment Gateway {PaymentGatewayConfig.CHECK_ORDER_STATUS} refused to connect",
             )
 
     else:
-        logger.warning(
+        log.warning(
             "Integrity Error! order_id fetched from db for client_txn_id does not match order_id returned by UPI Gateway"
         )
         return adirect(
