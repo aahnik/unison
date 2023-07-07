@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s expand_aliases
+
 git fetch && git pull
 
 rm -rf .venv
