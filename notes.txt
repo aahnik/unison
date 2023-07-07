@@ -15,3 +15,10 @@ Notes for Admins
 - carousel image size:
 
 gunicorn --bind 0.0.0.0:8000 temple_web.wsgi
+
+
+Edit gunicorn service
+sudo micro /etc/systemd/system/gunicorn.service
+
+See django app logs
+sudo journalctl -u gunicorn -n 100

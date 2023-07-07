@@ -7,8 +7,8 @@ After=network.target
 [Service]
 User=aahnik
 Group=www-data
-WorkingDirectory=path/to/proj/src
-ExecStart=path/to/proj/.venv/bin/gunicorn \
+WorkingDirectory=/home/aahnik/temple-web/src
+ExecStart=/home/aahnik/temple-web/.venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
