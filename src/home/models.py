@@ -17,9 +17,11 @@ class ModelImage(models.Model):
     def save(self, *args, **kwargs):
         super().save(args, kwargs)
         # print(self.redirect_url)
-        if self.redirect_url is None or extract_timestamp(
-            self.redirect_url
-        ) != extract_timestamp(self.image.url):
+        if self.redirect_url is None or (
+            extract_timestamp(self.redirect_url) is not None
+            and extract_timestamp(self.redirect_url)
+            != extract_timestamp(self.image.url)
+        ):
             self.redirect_url = self.image.url
             print(self.redirect_url)
 

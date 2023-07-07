@@ -14,4 +14,9 @@ def upload_image_to(instance, filename):
 
 
 def extract_timestamp(url: str):
-    return url.split("_")[-2]
+    try:
+        result = url.split("_")[-2]
+        # TODO: assert that result is a valid timestamp
+        return result
+    except Exception as _:
+        return None
