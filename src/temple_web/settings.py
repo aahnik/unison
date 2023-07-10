@@ -58,7 +58,10 @@ INSTALLED_APPS = [
     # our custom apps
     "home.apps.HomeConfig",
     "donations.apps.DonationsConfig",
-    "activities.apps.ActivitiesConfig"
+    "activities.apps.ActivitiesConfig",
+    # more third party apps
+    # recommended to be placed at last
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [

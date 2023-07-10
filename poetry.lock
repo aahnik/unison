@@ -404,6 +404,18 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-cleanup"
+version = "8.0.0"
+description = "Deletes old files."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-cleanup-8.0.0.tar.gz", hash = "sha256:c739a05544e1e48dc848871c870dbf1595f8533d24523bc67360e43562edaf0d"},
+    {file = "django_cleanup-8.0.0-py2.py3-none-any.whl", hash = "sha256:8cd8872d67fe1501b19a843d006cdb5673cfbb74ac3d6d8f2c60e8e7723a7f5b"},
+]
+
+[[package]]
 name = "django-json-widget"
 version = "1.1.1"
 description = "Django json widget is an alternative widget that makes it easy to edit the jsonfield field of django."
@@ -1542,4 +1554,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e229fb39f3d2b157674202d6486790789adbcd75529b4f1a5126d3681eede8fb"
+content-hash = "2722a90d30406c6dd39bb38af855b8b5cc3c1a6d2151cd3cb2618b1f5ae6919c"
