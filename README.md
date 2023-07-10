@@ -40,7 +40,8 @@ A modern and dynamic website for temple communities.
 Feel free to create an issue in this repo mentioning your needs and email,
 and we will get back to you soon.
 
+## Deployment Guide
 
-## References
-
+- [Basic server configuration](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04)
 - [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04)
+- [Setup SSL certificate for HTTPS](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)

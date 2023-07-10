@@ -22,3 +22,31 @@ sudo micro /etc/systemd/system/gunicorn.service
 
 See django app logs
 sudo journalctl -u gunicorn -n 100
+
+Edit gunicorn socket file
+sudo micro /etc/systemd/system/gunicorn.socket
+
+Edit gunicorn service file
+sudo micro /etc/systemd/system/gunicorn.service
+
+Edit nginx conf file
+sudo micro /etc/nginx/sites-available/iskconbarasat
+
+Give permission to your django project
+
+sudo chmod -R 777 /var/www/
+
+Start Gunicorn
+sudo systemctl start gunicorn.socket
+sudo systemctl enable gunicorn.socket
+
+Check gunicorn status
+sudo systemctl status gunicorn
+curl --unix-socket /run/gunicorn.sock localhost
+
+Enable nginx conf
+sudo ln -s /etc/nginx/sites-available/iskconbarasat /etc/nginx/sites-enabled
+
+Ufw allow
+sudo ufw delete allow 8000
+sudo ufw allow 'Nginx Full'
