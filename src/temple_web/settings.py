@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # our custom apps
     "home.apps.HomeConfig",
     "donations.apps.DonationsConfig",
+    "activities.apps.ActivitiesConfig"
 ]
 
 MIDDLEWARE = [
