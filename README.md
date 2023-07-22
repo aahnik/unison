@@ -40,6 +40,12 @@ A modern and dynamic website for temple communities.
 Feel free to create an issue in this repo mentioning your needs and email,
 and we will get back to you soon.
 
+## Django Guide
+
+Other than extensively refering to the Django documentation, I found these articles really helpful.
+
+- [One Database Model, Many Behaviors: A Practical Introduction to Django Proxy Models](https://wellfire.co/learn/using-django-proxy-models/)
+
 ## Deployment Guide
 
 - [Basic server configuration](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04)
