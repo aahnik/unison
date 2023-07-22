@@ -30,8 +30,17 @@ SECRET_KEY = MyDjS.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = MyDjS.DEBUG
 
+MY_LOCAL_IP = "192.168.1.12"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    ".ngrok-free.app",
+    "0.0.0.0",
+]
+if MyDjS.DEBUG:
+    ALLOWED_HOSTS += MY_LOCAL_IP
+
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "https://*.ngrok-free.app/",
@@ -42,6 +51,7 @@ if MyDjS.PROD:
     CSRF_TRUSTED_ORIGINS.append(f"https://*.{MyDjS.PROD_DOMAIN}")
 
 # Application dek,finition
+AUTH_USER_MODEL = "auth.User"
 
 INSTALLED_APPS = [
     # core django apps
@@ -59,6 +69,7 @@ INSTALLED_APPS = [
     "home.apps.HomeConfig",
     "donations.apps.DonationsConfig",
     "activities.apps.ActivitiesConfig",
+    "accounts.apps.AccountsConfig",
     # more third party apps
     # recommended to be placed at last
     "django_cleanup.apps.CleanupConfig",
