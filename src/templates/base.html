@@ -33,5 +33,14 @@
     </div>
 
     <script src="{% static 'flowbite.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/datepicker.min.js"></script>
+
+    <script type="text/javascript">
+      const handlePrint = () => {
+        var actContents = document.body.innerHTML;
+        document.body.innerHTML = actContents;
+        window.print();
+      };
+    </script>
   </body>
 </html>
