@@ -32,6 +32,8 @@ urlpatterns = (
     [
         path("", include("home.urls")),
         path("donations/", include("donations.urls")),
+        path("accounts/", include("accounts.urls")),
+
         # path("404/", views.page_not_found_view, name="404"),
         path("admin/", admin.site.urls),
     ]

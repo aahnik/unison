@@ -1,0 +1,84 @@
+{% extends "commons.html" %}
+
+<!-- title -->
+{% block title %} Invoice {% endblock title %}
+
+<!-- content -->
+{% block content %}
+
+<section class="h-full w-full">
+  <div class="w-full flex justify-center align-middle flex-wrap">
+    <div class="my-12 py-6 mx-4 px-12 rounded-lg bg-gray-100 drop-shadow-lg">
+      <h1 class="text-xl text-center font-bold mb-4">Transanction Bill</h1>
+      <kbd
+        class="px-2 py-1.5 text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
+      >
+        #Invoice ID {{transanction.auto_invoice_id}}</kbd
+      >
+      <br />
+
+      <div class="my-12">
+        <table class="table-auto w-full">
+          <tbody>
+            <tr>
+              <td class="px-4 py-2 text-left">Category</td>
+              <td class="px-4 py-2 text-right">{{ transanction.category }}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Amount</td>
+              <td class="px-4 py-2 text-right">{{ transanction.amount }}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Purpose/Detail</td>
+              <td class="px-4 py-2 text-right">{{ transanction.purpose }}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Date</td>
+              <td class="px-4 py-2 text-right">{{ transanction.tdate }}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Transanction Type</td>
+              <td class="px-4 py-2 text-right">
+                {% if transanction.ttype == "IN" %} INCOME {%else%} EXPENSE
+                {%endif%}
+              </td>
+            </tr>
+
+            <tr>
+              <td class="px-4 py-2 text-left">Bill No</td>
+              <td class="px-4 py-2 text-right">{{ transanction.bill_no }}</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Approved By</td>
+              <td class="px-4 py-2 text-right">
+                {{ transanction.approved_by }}
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Fund Raiser</td>
+              <td class="px-4 py-2 text-right">
+                {{ transanction.fund_raiser }}
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2 text-left">Extra Details</td>
+              <td class="px-4 py-2 text-right">
+                {{ transanction.extra_details }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button
+        onclick="handlePrint()"
+        type="button"
+        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-md px-6 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 mt-12 mx-6"
+      >
+        Print
+      </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

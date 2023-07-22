@@ -1,0 +1,198 @@
+{% extends "commons.html" %}
+
+<!-- title -->
+{% block title %} Statement {% endblock title %}
+
+<!-- content -->
+{% block content %}
+
+<section class="h-full w-full">
+  <div class="w-full flex justify-center align-middle flex-wrap">
+    <div class="my-12 py-6 mx-4 rounded-lg bg-gray-100 drop-shadow-lg">
+      <form method="post">
+        {% csrf_token %}
+        <!-- Display non-field errors -->
+        {% if form.non_field_errors %}
+        <ul class="errorlist">
+          {% for error in form.non_field_errors %}
+          <div
+            class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert"
+          >
+            <span class="font-medium">Validation Error</span> {{error}}
+          </div>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <!-- display the errors -->
+        {% for field in form %}
+        <!-- loop through all the fields -->
+        {% if field.errors %}
+        <!-- show the list of errors if field has errors -->
+
+        {% for error in field.errors %}
+        <!-- iterate through all the errors -->
+        <div
+          class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <span class="font-medium">{{ field.label }}</span> {{error}}
+        </div>
+        {% endfor %}
+        <!-- end for -->
+        {% endif %}
+        <!-- end if -->
+
+        {% endfor %}
+        <!-- end for  -->
+
+        <br />
+        <div class="mt-6 flex flex-wrap justify-between">
+          <!-- choose account -->
+          <div class="basis-full relative mx-6 my-2">
+            <select
+              id="{{ form.account_category.id_for_label }}"
+              name="{{ form.account_category.html_name }}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 w-full"
+            >
+              <!-- An empty option to display a blank choice for the user -->
+              <option value="" selected disabled>
+                -- Select an account category --
+              </option>
+              <!-- Loop through the ExpenseCategory queryset and display each category -->
+              {% for choice in form.account_category.field.choices %}
+
+              <!-- cond -->
+              {% if form.account_category.value|add:"0" == choice.0 %}
+              <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+              {% else %}
+              <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+              {% endif %}
+              <!-- endfor -->
+              {% endfor %}
+            </select>
+          </div>
+          <!-- start date -->
+          <div class="relative w-full sm:w-2/5 mx-6 sm:ml-6 my-2">
+            <div
+              class="px-2 py-2 absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                />
+              </svg>
+            </div>
+            <input
+              datepicker
+              type="text"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Start date"
+              id="{{ form.start_date.id_for_label }}"
+              name="{{ form.start_date.html_name }}"
+              value="{{ form.start_date.value|default:'' }}"
+            />
+          </div>
+          <!-- end date -->
+          <div class="relative w-full sm:w-2/5 mx-6 sm:mr-6 my-2">
+            <div
+              class="px-2 py-2 absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                />
+              </svg>
+            </div>
+            <input
+              datepicker
+              type="text"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="End date"
+              id="{{ form.end_date.id_for_label }}"
+              name="{{ form.end_date.html_name }}"
+              value="{{ form.end_date.value|default:'' }}"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-md px-6 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 mt-12 mx-6"
+        >
+          Submit
+        </button>
+
+        <button
+          onclick="handlePrint()"
+          type="button"
+          class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-md px-6 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 mt-12 mx-6"
+        >
+          Print
+        </button>
+      </form>
+    </div>
+
+    <br />
+    <br />
+
+    <div
+      class=" shadow-md sm:rounded-lg inline-block mx-12 my-12"
+    >
+      <!--  -->
+      <table class="text-md text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+              Invoice no
+            </th>
+            <th scope="col" class="px-6 py-3">Category</th>
+            <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+              Amount
+            </th>
+            <th scope="col" class="px-6 py-3">Purpose</th>
+            <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+              Date
+            </th>
+            <th scope="col" class="px-6 py-3">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in queryset %}
+
+          <tr class="border-b border-gray-200 dark:border-gray-700">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+            >
+              {{item.auto_invoice_id}}
+            </th>
+            <td class="px-6 py-4">{{item.category}}</td>
+            <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+              {{item.amount}}
+            </td>
+            <td class="px-6 py-4">{{item.purpose}}</td>
+            <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+              {{item.tdate}}
+            </td>
+            <td class="px-6 py-4">{{item.ttype}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
