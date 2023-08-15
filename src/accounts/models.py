@@ -22,11 +22,23 @@ class Direction(models.TextChoices):
     EXPENSE = "EX", "🔴 Expense"
 
 
+class TxnStatus(models.TextChoices):
+    DUE = "DUE", "⏳ Due"
+    PAID = "PAID", "✅ Paid"
+
+
 class FundRaiser(models.Model):
     name = models.CharField(max_length=256)
 
     def __str__(self):
         return self.name
+
+
+class PaymentMode(models.Model):
+    mode = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.mode
 
 
 # for expense
@@ -49,6 +61,14 @@ def generate_invoice_no():
 class Transanction(models.Model):
     category = models.ForeignKey(ExpenseCategory, on_delete=models.SET_NULL, null=True)
     amount = models.PositiveIntegerField(default=0)
+    mode = models.ForeignKey(PaymentMode, on_delete=models.SET_NULL, null=True)
+    txn_status = models.CharField(
+        verbose_name="Transanction Status",
+        max_length=12,
+        choices=TxnStatus.choices,
+        blank=True,
+        null=True,
+    )
     purpose = models.CharField(verbose_name="Purpose/Detail", max_length=512)
     tdate = models.DateField(verbose_name="Date", auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)

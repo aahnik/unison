@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ExpenseCategory, Transanction, FundRaiser
+from .models import ExpenseCategory, Transanction, FundRaiser, PaymentMode
 
 # Register your models here.
 
@@ -12,6 +12,11 @@ class ExpenseCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(FundRaiser)
 class FundraiserAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(PaymentMode)
+class PaymentModeAdmin(admin.ModelAdmin):
     pass
 
 
@@ -45,8 +50,18 @@ class TransanctionAdmin(admin.ModelAdmin):
         "ttype",
         "amount",
         "purpose",
+        "txn_status",
+        "mode",
         "tdate",
         "category",
         "invoice_link",
     ]
-    list_filter = ["ttype", AmountRangeFilter, "tdate", "category"]
+    list_filter = [
+        "ttype",
+        "category",
+        "txn_status",
+        "fund_raiser",
+        AmountRangeFilter,
+        "tdate",
+        "mode",
+    ]
