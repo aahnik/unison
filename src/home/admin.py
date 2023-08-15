@@ -12,6 +12,7 @@ from .models import (
     CallToAction,
     HomeContent,
     SocialLink,
+    FooterAddress
 )
 
 
@@ -24,7 +25,7 @@ class NavLinkForm(forms.ModelForm):
 class CallToActionForm(forms.ModelForm):
     class Meta:
         model = CallToAction
-        fields = ["title", "description", "button_text", "fa_icon"]
+        fields = ["title", "description", "link", "button_text", "fa_icon"]
 
 
 class CallToActionInline(admin.StackedInline):
@@ -46,16 +47,19 @@ class NavLinkInline(admin.StackedInline):
     extra = 0
 
 
-
 class SocialLinkInline(admin.StackedInline):
     model = SocialLink
     extra = 0
 
-
+class FooterAddressInline(admin.StackedInline):
+    model = FooterAddress
+    extra = 0
+    min_num = 1
+    max_num = 1
 
 @admin.register(SiteConfig)
 class SiteConfigAdmin(SingletonModelAdmin):
-    inlines = [NavLinkInline, SocialLinkInline]
+    inlines = [NavLinkInline, SocialLinkInline, FooterAddressInline]
 
 
 class FooterLinkInline(admin.StackedInline):

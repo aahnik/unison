@@ -39,6 +39,7 @@ class Link(models.Model):
 
     class Meta:
         abstract = True
+
     def __str__(self) -> str:
         return self.title
 
@@ -72,7 +73,7 @@ class SocialLink(Link):
 
         except Exception as _:
             self.icon_brand = "fa-solid fa-link"
-        super().save(args, kwargs)
+        super().save(*args, **kwargs)
 
 
 class FooterLinkCateg(models.Model):
@@ -87,15 +88,42 @@ class FooterLink(Link):
     footer_link_categ = models.ForeignKey("FooterLinkCateg", on_delete=models.CASCADE)
 
 
+class FooterAddress(SingletonModel):
+    site_config = models.ForeignKey("SiteConfig", on_delete=models.CASCADE)
+
+    aline1 = models.CharField(
+        verbose_name="Address Line 1", max_length=512, blank=True, null=True
+    )
+    aline2 = models.CharField(
+        verbose_name="Address Line 2", max_length=512, blank=True, null=True
+    )
+    aline3 = models.CharField(
+        verbose_name="Address Line 3", max_length=512, blank=True, null=True
+    )
+    contact_no = models.CharField(
+        verbose_name="Contact Phone no", max_length=12, blank=True, null=True
+    )
+
+    def __str__(self):
+        return "Footer Address"
+
+
 class CallToAction(models.Model):
     # cta sections in home page
     home_content = models.ForeignKey("HomeContent", on_delete=models.CASCADE)
     title = models.CharField(max_length=256, default="Call to Action Card")
-    description = models.CharField(max_length=1024)
-    button_text = models.CharField(max_length=32)
+    cta_type = models.CharField(max_length=20, default="Activity")
+    description = models.CharField(
+        max_length=1024, default="Some description of this page."
+    )
+    button_text = models.CharField(max_length=32, default="Read more")
+    link = models.CharField(max_length=256, default="/")
     fa_icon = models.CharField(
         max_length=4096, default="fa-solid fa-wand-magic-sparkles"
     )
+
+    def __str__(self):
+        return self.title
 
 
 NEWSLETTER_ICON_CHOICES = [
@@ -120,6 +148,10 @@ class HomeContent(SingletonModel):
         max_length=100,
         choices=NEWSLETTER_ICON_CHOICES,
         default=NEWSLETTER_ICON_CHOICES[1][0],
+    )
+    activity_subhead = models.CharField(
+        max_length=512,
+        default="Here at Temple we focus on overall wellbeing and development.",
     )
 
 
