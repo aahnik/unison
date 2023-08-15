@@ -13,3 +13,6 @@ class CommunityActivity(models.Model):
     )
     fa_icon = models.TextField(max_length=100, default="fa-solid fa-graduation-cap")
     cover_image = models.ImageField(upload_to=upload_image_to, null=True, blank=True)
+
+    def __str__(self):
+        return self.title

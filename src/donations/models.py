@@ -60,7 +60,7 @@ class DonationReceived(models.Model):
 
     def clean(self):
         super().clean()
-        # in case of preselecting donation tier, this line is giving error
+
         donation_tier_amt = DonationTier.objects.get(id=self.donation_tier.pk).amount
         if self.amount < donation_tier_amt:
             raise ValidationError(
