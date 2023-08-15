@@ -20,73 +20,71 @@
       >
       <br />
 
-      <div class="my-12">
-        <table class="table-auto w-full">
-          <tbody>
-            <tr>
-              <td class="px-4 py-2 text-left">Category</td>
-              <td class="px-4 py-2 text-right">{{ transanction.category }}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Amount</td>
-              <td class="px-4 py-2 text-right">{{ transanction.amount }}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Payment Mode</td>
-              <td class="px-4 py-2 text-right">{{ transanction.mode }}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Payment Status</td>
-              <td class="px-4 py-2 text-right">{{ transanction.txn_status}}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Purpose/Detail</td>
-              <td class="px-4 py-2 text-right">{{ transanction.purpose }}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Date</td>
-              <td class="px-4 py-2 text-right">{{ transanction.tdate }}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Transanction Type</td>
-              <td class="px-4 py-2 text-right">
-                {% if transanction.ttype == "IN" %} INCOME {%else%} EXPENSE
-                {%endif%}
-              </td>
-            </tr>
-
-            <tr>
-              <td class="px-4 py-2 text-left">Bill No</td>
-              <td class="px-4 py-2 text-right">{{ transanction.bill_no }}</td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Approved By</td>
-              <td class="px-4 py-2 text-right">
-                {{ transanction.approved_by }}
-              </td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Fund Raiser</td>
-              <td class="px-4 py-2 text-right">
-                {{ transanction.fund_raiser }}
-              </td>
-            </tr>
-            <tr>
-              <td class="px-4 py-2 text-left">Extra Details</td>
-              <td class="px-4 py-2 text-right">
-                {{ transanction.extra_details }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <hr class="h-px my-8 bg-gray-400 border-0 dark:bg-gray-700">
-        <div class="my-4 text-center text-sm">
-          Contact Details
-          <p>Address: {{biller.biller_address}}</p>
-          <p>Phone no.: {{biller.biller_phone}}</p>
-          <p>Email: {{biller.biller_email}}</p>
-
+      <div class="bg-white shadow-md rounded-lg p-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-4">Transaction Details</h2>
+          <table class="table-fixed w-full">
+            <tbody>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Category</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.category }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Amount</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.amount }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Payment Mode</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.mode }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Payment Status</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.txn_status }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Purpose/Detail</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.purpose }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Date</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.tdate }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Transaction Type</td>
+                <td class="py-2 pl-4 text-right">
+                  {% if transanction.ttype == "IN" %} INCOME {% else %} EXPENSE {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Bill No</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.bill_no }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Approved By</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.approved_by }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Fund Raiser</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.fund_raiser }}</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-left font-medium">Extra Details</td>
+                <td class="py-2 pl-4 text-right">{{ transanction.extra_details }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <hr class="h-px mb-6 bg-gray-300 border-0">
+
+        <div class="mb-4 text-center text-sm">
+          <h2 class="text-lg font-semibold mb-2">Contact Details</h2>
+          <p class="mb-2">{{ biller.biller_address }}</p>
+          <p class="mb-2">{{ biller.biller_phone }}</p>
+          <p>{{ biller.biller_email }}</p>
+        </div>
+      </div>
+
 
         <button
         onclick="handlePrint()"
