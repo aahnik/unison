@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import date, datetime
 from django.utils.html import format_html
-
+from solo.models import SingletonModel
 # Create your models here.
 
 
@@ -40,6 +40,11 @@ class PaymentMode(models.Model):
     def __str__(self):
         return self.mode
 
+class BillerDetails(SingletonModel):
+    biller_name = models.CharField(max_length=256,default="Biller Name")
+    biller_address = models.TextField(max_length=2048, default="Biller Address")
+    biller_phone = models.CharField(max_length=12, default="9999999999")
+    biller_email = models.CharField(max_length=64, default="biller@example.com")
 
 # for expense
 # purchase bill no

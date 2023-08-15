@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth.decorators import permission_required
-from .models import Transanction, ExpenseCategory
+from .models import Transanction, ExpenseCategory, BillerDetails
 from .forms import GetStatementForm
 
 
@@ -37,6 +37,11 @@ def view_invoice(request):
     invoice_id = request.GET["id"]
     try:
         transaction = Transanction.objects.get(auto_invoice_id=invoice_id)
-        return render(request, "accounts/invoice.html", {"transanction": transaction})
+        biller = BillerDetails.get_solo()
+        return render(
+            request,
+            "accounts/invoice.html",
+            {"transanction": transaction, "biller": biller},
+        )
     except Transanction.DoesNotExist as err:
         raise Http404("Invoice does not exist.")
