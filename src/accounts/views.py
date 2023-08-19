@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.contrib.auth.decorators import permission_required
-from .models import Transanction, ExpenseCategory, BillerDetails
+from .models import Transanction, ExpenseCategory, BillerDetails, Direction
 from .forms import GetStatementForm
+
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -19,7 +21,29 @@ def get_statement(request):
             queryset = Transanction.objects.filter(
                 category=category, tdate__range=[start_date, end_date]
             )
-            ctx.update({"queryset": queryset})
+            # category = ExpenseCategory.objects.get()
+            expense = queryset.filter(ttype=Direction.EXPENSE).aggregate(Sum("amount"))[
+                "amount__sum"
+            ]
+            income = queryset.filter(ttype=Direction.INCOME).aggregate(Sum("amount"))[
+                "amount__sum"
+            ]
+            cat_bal = ExpenseCategory.objects.get(category=category)
+            # print(expense)
+            # print(income)
+            # print(cat_bal)
+            # print(cat_bal.category_balance)
+
+            ctx.update(
+                {
+                    "queryset": queryset,
+                    "income": income,
+                    "expense": expense,
+                    "curr_bal": income - expense,
+                    "cat_bal": cat_bal.category_balance,
+                    "num_txn": len(queryset)
+                }
+            )
 
             # print(form)
             # Process the form data here
