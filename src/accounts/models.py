@@ -57,6 +57,12 @@ class BillerDetails(SingletonModel):
 # fund raiser (select from items)
 # person address
 
+# class AdminLinkModel(models.Model):
+#     # blank dummy model
+#     class Meta:
+#         # abstract = True
+#         pass
+
 
 def generate_invoice_no():
     now = datetime.now()

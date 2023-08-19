@@ -1,7 +1,17 @@
 from django.contrib import admin
-from .models import ExpenseCategory, Transanction, FundRaiser, PaymentMode
+from .models import (
+    ExpenseCategory,
+    Transanction,
+    FundRaiser,
+    PaymentMode,
+    BillerDetails,
+    # AdminLinkModel
+)
+from solo.admin import SingletonModelAdmin
+# from utils.admin_links import BaseCustomAdmin
+# from django.urls import reverse
+# from django.shortcuts import redirect
 
-# Register your models here.
 
 
 @admin.register(ExpenseCategory)
@@ -17,6 +27,11 @@ class FundraiserAdmin(admin.ModelAdmin):
 
 @admin.register(PaymentMode)
 class PaymentModeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(BillerDetails)
+class BillerDetailsAdmin(SingletonModelAdmin):
     pass
 
 
@@ -65,3 +80,8 @@ class TransanctionAdmin(admin.ModelAdmin):
         "tdate",
         "mode",
     ]
+
+# @admin.register(AdminLinkModel)
+# class GetStatementViewLinkAdmin(BaseCustomAdmin):
+#     def custom_view(self, request):
+#         return redirect(reverse("accounts:get-statement"))
