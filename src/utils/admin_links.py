@@ -1,30 +1,27 @@
-# from django.db import models
 from django.contrib import admin
-from django.urls import path
-from django.urls import reverse
 from django.shortcuts import redirect
 
+# copy paste this base class to your models.py
 
 # class AdminLinkModel(models.Model):
-#     # blank dummy model
-#     class Meta:
-#         # abstract = True
-#         pass
+#     # a blank dummy model for registering links in admin page
+#     # create a child class in models.py and set proxy=True inside class Meta
+#     pass
 
 
-class BaseCustomAdmin(admin.ModelAdmin):
-    def get_urls(self):
-        urls = super().get_urls()
-        custom_urls = [
-            path(
-                "custom-view/",
-                self.admin_site.admin_view(self.custom_view),
-                name="custom-view",
-            ),
-        ]
-        return custom_urls + urls
+class ViewLinkAdmin(admin.ModelAdmin):
+    # create a child class, and define your own redirect link
 
-    def custom_view(self, request):
-        # Your custom view logic here
-        # this method needs to be overriden  by the children class
-        return redirect(reverse("custom-view-url-name"))
+    redirect_link = "/"
+
+    def changelist_view(self, request, extra_context=None):
+        return redirect(self.redirect_link)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False

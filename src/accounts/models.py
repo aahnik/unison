@@ -40,11 +40,13 @@ class PaymentMode(models.Model):
     def __str__(self):
         return self.mode
 
+
 class BillerDetails(SingletonModel):
-    biller_name = models.CharField(max_length=256,default="Biller Name")
+    biller_name = models.CharField(max_length=256, default="Biller Name")
     biller_address = models.TextField(max_length=2048, default="Biller Address")
     biller_phone = models.CharField(max_length=12, default="9999999999")
     biller_email = models.CharField(max_length=64, default="biller@example.com")
+
 
 # for expense
 # purchase bill no
@@ -57,11 +59,14 @@ class BillerDetails(SingletonModel):
 # fund raiser (select from items)
 # person address
 
-# class AdminLinkModel(models.Model):
-#     # blank dummy model
-#     class Meta:
-#         # abstract = True
-#         pass
+class AdminLinkModel(models.Model):
+    # a blank dummy model for registering links in admin page
+    # create a child class in models.py and set proxy=True inside class Meta
+    pass
+
+class GetStatement(AdminLinkModel):
+    class Meta:
+        proxy = True
 
 
 def generate_invoice_no():

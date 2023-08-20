@@ -5,12 +5,10 @@ from .models import (
     FundRaiser,
     PaymentMode,
     BillerDetails,
-    # AdminLinkModel
+    GetStatement
 )
 from solo.admin import SingletonModelAdmin
-# from utils.admin_links import BaseCustomAdmin
-# from django.urls import reverse
-# from django.shortcuts import redirect
+from utils.admin_links import ViewLinkAdmin
 
 
 
@@ -81,7 +79,7 @@ class TransanctionAdmin(admin.ModelAdmin):
         "mode",
     ]
 
-# @admin.register(AdminLinkModel)
-# class GetStatementViewLinkAdmin(BaseCustomAdmin):
-#     def custom_view(self, request):
-#         return redirect(reverse("accounts:get-statement"))
+
+@admin.register(GetStatement)
+class GetStatementViewLinkAdmin(ViewLinkAdmin):
+    redirect_link = "/accounts/get-statement"
