@@ -12,7 +12,7 @@ from .models import (
     CallToAction,
     HomeContent,
     SocialLink,
-    FooterAddress
+    FooterAddress,
 )
 
 
@@ -51,11 +51,13 @@ class SocialLinkInline(admin.StackedInline):
     model = SocialLink
     extra = 0
 
+
 class FooterAddressInline(admin.StackedInline):
     model = FooterAddress
     extra = 0
     min_num = 1
     max_num = 1
+
 
 @admin.register(SiteConfig)
 class SiteConfigAdmin(SingletonModelAdmin):

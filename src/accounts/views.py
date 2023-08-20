@@ -41,7 +41,7 @@ def get_statement(request):
                     "expense": expense,
                     "curr_bal": income - expense,
                     "cat_bal": cat_bal.category_balance,
-                    "num_txn": len(queryset)
+                    "num_txn": len(queryset),
                 }
             )
 

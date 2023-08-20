@@ -5,11 +5,10 @@ from .models import (
     FundRaiser,
     PaymentMode,
     BillerDetails,
-    GetStatement
+    GetStatement,
 )
 from solo.admin import SingletonModelAdmin
 from utils.admin_links import ViewLinkAdmin
-
 
 
 @admin.register(ExpenseCategory)

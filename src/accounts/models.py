@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date, datetime
 from django.utils.html import format_html
 from solo.models import SingletonModel
+
 # Create your models here.
 
 
@@ -59,10 +60,12 @@ class BillerDetails(SingletonModel):
 # fund raiser (select from items)
 # person address
 
+
 class AdminLinkModel(models.Model):
     # a blank dummy model for registering links in admin page
     # create a child class in models.py and set proxy=True inside class Meta
     pass
+
 
 class GetStatement(AdminLinkModel):
     class Meta:
