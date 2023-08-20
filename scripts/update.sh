@@ -19,3 +19,8 @@ source .venv/bin/activate
 
 pip install -r requirements.txt
 
+# update migrations and static files
+cd src
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic -c --no-input
