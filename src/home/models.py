@@ -89,7 +89,7 @@ class FooterLink(Link):
 
 
 class FooterAddress(SingletonModel):
-    site_config = models.ForeignKey("SiteConfig", on_delete=models.CASCADE)
+    site_config = models.ForeignKey("SiteConfig", on_delete=models.CASCADE, null=True)
 
     aline1 = models.CharField(
         verbose_name="Address Line 1", max_length=512, blank=True, null=True
