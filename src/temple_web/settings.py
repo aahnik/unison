@@ -43,7 +43,7 @@ if MyDjS.DEBUG:
     ALLOWED_HOSTS += [MY_LOCAL_IP]
 if MyDjS.MORE_ALLOWED_HOSTS:
     ALLOWED_HOSTS += MyDjS.MORE_ALLOWED_HOSTS
-
+# print(ALLOWED_HOSTS)
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "https://*.ngrok-free.app/",

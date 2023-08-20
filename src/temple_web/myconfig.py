@@ -33,7 +33,7 @@ class MyDjangoSettings:
     PROD_FILES_ROOT = config("PROD_FILES_ROOT", default="/var/www/", cast=str)
     PROD_DOMAIN = config("PROD_DOMAIN", cast=str)
     SECRET_KEY = config("SECRET_KEY", cast=str)
-    MORE_ALLOWED_HOSTS = config("MORE_ALLOWED_HOSTS", cast=Csv())
+    MORE_ALLOWED_HOSTS = config("MORE_ALLOWED_HOSTS", cast=Csv(), default="127.0.0.1")
 
 
 # print(metadata())
