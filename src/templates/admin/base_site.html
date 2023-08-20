@@ -1,3 +1,5 @@
 {% extends "admin/base_site.html" %} {% block extrahead %}
+<!-- put favicon -->
+{% if site_config.favicon %}
 <link rel="icon" type="image/x-icon" href="{{site_config.favicon.url}}" />
-{% endblock %}
+{% endif %} {% endblock %}
