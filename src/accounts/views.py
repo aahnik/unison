@@ -29,17 +29,16 @@ def get_statement(request):
                 "amount__sum"
             ]
             cat_bal = ExpenseCategory.objects.get(category=category)
-            # print(expense)
-            # print(income)
-            # print(cat_bal)
-            # print(cat_bal.category_balance)
+            print(expense)
+            print(income)
+            print(cat_bal)
+            print(cat_bal.category_balance)
 
             ctx.update(
                 {
                     "queryset": queryset,
                     "income": income,
                     "expense": expense,
-                    "curr_bal": income - expense,
                     "cat_bal": cat_bal.category_balance,
                     "num_txn": len(queryset),
                 }
