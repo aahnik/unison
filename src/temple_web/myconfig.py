@@ -5,6 +5,7 @@
 from urllib.parse import urljoin
 from decouple import config
 from importlib import metadata
+from decouple import Csv
 
 DEPLOYMENT_VERSION = config(
     "DEPLOYMENT_VERSION", default="TestingLocal-ubuntu23-aahnik"
@@ -32,6 +33,7 @@ class MyDjangoSettings:
     PROD_FILES_ROOT = config("PROD_FILES_ROOT", default="/var/www/", cast=str)
     PROD_DOMAIN = config("PROD_DOMAIN", cast=str)
     SECRET_KEY = config("SECRET_KEY", cast=str)
+    MORE_ALLOWED_HOSTS = config("MORE_ALLOWED_HOSTS", cast=Csv())
 
 
 # print(metadata())
