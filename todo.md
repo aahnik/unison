@@ -52,3 +52,9 @@ Thanks
 
 
 - [ ] add maintenance mode to website. show mmode page to public. but admin can see all pages. but show one sticky bar of maintenance mode.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+- [ ] referal based registration/signup
+- [ ] sign in page
+- efficient photo reuse in different part os website

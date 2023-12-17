@@ -3,11 +3,10 @@ test.py
 test.ipynb
 local-cdn
 *.logs
+.idea
 
 
-
-
-
+src/tester
 
 
 

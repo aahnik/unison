@@ -53,8 +53,8 @@ if MyDjS.PROD:
     ALLOWED_HOSTS.append(f".{MyDjS.PROD_DOMAIN}")
     CSRF_TRUSTED_ORIGINS.append(f"https://*.{MyDjS.PROD_DOMAIN}")
 
-# Application dek,finition
-AUTH_USER_MODEL = "auth.User"
+
+AUTH_USER_MODEL = "users.TempleWebUser"
 
 INSTALLED_APPS = [
     # core django apps
@@ -71,11 +71,16 @@ INSTALLED_APPS = [
     # our custom apps
     "home.apps.HomeConfig",
     "donations.apps.DonationsConfig",
+    # "donations.apps.OnlinePujaConfig",
     "activities.apps.ActivitiesConfig",
     "accounts.apps.AccountsConfig",
+    "tester.apps.TesterConfig",
+    "users.apps.UsersConfig",
     # more third party apps
     # recommended to be placed at last
     "django_cleanup.apps.CleanupConfig",
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -145,7 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Asia/Calcutta"
+# TIME_ZONE = "Asia/Calcutta"~~
 
 USE_I18N = True
 
@@ -195,3 +200,7 @@ LOGGING = {
         "level": "DEBUG",
     },
 }
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"

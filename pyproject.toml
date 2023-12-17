@@ -16,6 +16,8 @@ djlint = "^1.31.0"
 python-decouple = "^3.8"
 gunicorn = "^20.1.0"
 django-cleanup = "^8.0.0"
+django-crispy-forms = "^2.1"
+crispy-tailwind = "^0.5.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,6 +25,7 @@ ruff = "^0.0.270"
 isort = "^5.12.0"
 black = "^23.3.0"
 ipykernel = "^6.23.1"
+mypy = "^1.6.0"
 
 [build-system]
 requires = ["poetry-core"]

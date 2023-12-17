@@ -50,3 +50,7 @@ sudo ln -s /etc/nginx/sites-available/iskconbarasat /etc/nginx/sites-enabled
 Ufw allow
 sudo ufw delete allow 8000
 sudo ufw allow 'Nginx Full'
+
+
+Download the sqlite db to my local machine
+scp aahnik@ip-address-of-server:/home/aahnik/temple-web/src/db.sqlite3 .
