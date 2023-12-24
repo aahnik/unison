@@ -35,7 +35,8 @@ urlpatterns = (
         # path("online-puja/", include("online_puja.urls")),
         path("accounts/", include("accounts.urls")),
         path("tester/", include("tester.urls")),
-        path("users/",include("users.urls") ),
+        path("users/", include("users.urls")),
+        path("events/", include("haps.urls")),
         # path("404/", views.page_not_found_view, name="404"),
         path("admin/", admin.site.urls),
     ]

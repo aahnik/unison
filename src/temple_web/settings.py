@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "tester.apps.TesterConfig",
     "users.apps.UsersConfig",
+    "haps",
     # more third party apps
     # recommended to be placed at last
     "django_cleanup.apps.CleanupConfig",
@@ -150,7 +151,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-# TIME_ZONE = "Asia/Calcutta"~~
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
