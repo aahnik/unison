@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind CSS Collapsible Sidebar</title>
+    <!-- Include the Tailwind CSS stylesheet -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-100">
+    <!-- Top Bar -->
+    <div class="bg-gray-800 text-white p-4">
+      <div class="flex">
+        <button id="toggleSidebar">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+        <h1 class="text-2xl font-bold ml-2">Top Bar</h1>
+      </div>
+    </div>
+
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <div id="sidebar" class="bg-gray-800 text-white w-64 p-6 hidden">
+        <h1 class="text-2xl font-bold mb-4">Teaching</h1>
+        <ul>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">Home</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">About</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">Services</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">Contact</a>
+          </li>
+        </ul>
+
+        <h1 class="text-2xl font-bold mb-4">Enrolled</h1>
+        <ul>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">Home</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">About</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">Services</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="text-gray-300 hover:text-white">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Content -->
+      <div class="flex-1 p-10">
+        <h1 class="text-3xl font-bold mb-4">Main Content</h1>
+        <p>Your main content goes here.</p>
+
+        
+      </div>
+    </div>
+
+    <script>
+      // JavaScript to toggle the sidebar on small screens
+      const sidebar = document.getElementById("sidebar");
+      const toggleSidebarButton = document.getElementById("toggleSidebar");
+
+      toggleSidebarButton.addEventListener("click", () => {
+        sidebar.classList.toggle("hidden");
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 768) {
+          sidebar.classList.remove("hidden");
+        }
+      });
+
+      // Automatically hide sidebar on small screens initially
+      if (window.innerWidth < 768) {
+        sidebar.classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>

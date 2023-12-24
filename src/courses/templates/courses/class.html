@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Google Classroom</title>
+  </head>
+  <body class="font-sans bg-gray-100">
+    <div class="border-b border-gray-200 dark:border-gray-700">
+      <ul
+        class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400"
+      >
+        <li class="me-2">
+          <input
+            type="radio"
+            id="tab-stream"
+            name="tab"
+            class="hidden"
+            checked
+          />
+          <label
+            for="tab-stream"
+            class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
+          >
+            <svg
+              class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
+              />
+            </svg>
+            Profile
+          </label>
+        </li>
+        <li class="me-2">
+          <input type="radio" id="tab-people" name="tab" class="hidden" />
+          <label
+            for="tab-people"
+            class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group"
+          >
+            <svg
+              class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M5 11.424V1a1 1 0 1 0-2 0v10.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.228 3.228 0 0 0 0-6.152ZM19.25 14.5A3.243 3.243 0 0 0 17 11.424V1a1 1 0 0 0-2 0v10.424a3.227 3.227 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.243 3.243 0 0 0 2.25-3.076Zm-6-9A3.243 3.243 0 0 0 11 2.424V1a1 1 0 0 0-2 0v1.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0V8.576A3.243 3.243 0 0 0 13.25 5.5Z"
+              />
+            </svg>
+            People
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Stream Tab Content -->
+    <div class="tab-content mt-4 mx-4">
+      <!-- Stream Tab Content - Stream View -->
+      <div id="tab-content-stream" class="tab-pane">
+        <!-- Classroom Header -->
+        <div class="mb-8">
+          <img
+            src="https://gist.github.com/assets/66209958/5f6e7814-79c6-43d9-8732-dd2d9dc5f416"
+            alt="Classroom Cover"
+            class="w-full h-48 object-cover mb-4"
+          />
+          <h1 class="text-3xl font-bold mb-2">Classroom Title</h1>
+          <p class="text-gray-600 mb-4">Classroom Description</p>
+        </div>
+
+        <!-- Stream of Posts -->
+        <div id="stream-posts">
+          <!-- Sample Post -->
+          <div class="bg-white p-4 mb-4 rounded shadow">
+            <p class="text-gray-800">Post Content...</p>
+          </div>
+          <!-- Add more posts dynamically based on your data -->
+        </div>
+      </div>
+
+      <!-- Stream Tab Content - People View -->
+      <div id="tab-content-people" class="tab-pane hidden">
+        <!-- People List -->
+        <div id="people-list" class="grid grid-cols-2 gap-4">
+          <!-- Teachers Section -->
+          <div>
+            <h2 class="text-xl font-bold mb-2">Teachers</h2>
+            <!-- List of Teachers -->
+            <ul>
+              <li class="text-gray-800">Teacher 1</li>
+              <li class="text-gray-800">Teacher 2</li>
+              <!-- Add more teachers dynamically based on your data -->
+            </ul>
+          </div>
+
+          <!-- Students Section -->
+          <div>
+            <h2 class="text-xl font-bold mb-2">Students</h2>
+            <!-- List of Students -->
+            <ul>
+              <li class="text-gray-800">Student 1</li>
+              <li class="text-gray-800">Student 2</li>
+              <!-- Add more students dynamically based on your data -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript for handling tab switching
+      const tabs = document.querySelectorAll('input[name="tab"]');
+      tabs.forEach((tab) => {
+        tab.addEventListener("change", () => {
+          const targetId = `tab-content-${tab.id.split("-")[1]}`;
+          const tabContents = document.querySelectorAll(".tab-content > div");
+          tabContents.forEach((content) => {
+            content.classList.toggle("hidden", content.id !== targetId);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
