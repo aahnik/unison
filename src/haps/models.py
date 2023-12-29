@@ -27,7 +27,7 @@ class Event(models.Model):
         super().save(args, kwargs)
 
     def get_absolute_url(self):
-        return f"/events/e/{self.slug}"
+        return f"/events/{self.slug}"
 
     def event_page(self):
         return format_html(f'<a href="{self.get_absolute_url()}" target="_blank">View Page</a>')
