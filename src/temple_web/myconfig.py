@@ -34,6 +34,15 @@ class MyDjangoSettings:
     PROD_DOMAIN = config("PROD_DOMAIN", cast=str)
     SECRET_KEY = config("SECRET_KEY", cast=str)
     MORE_ALLOWED_HOSTS = config("MORE_ALLOWED_HOSTS", cast=Csv(), default="127.0.0.1")
+    CELERY_BROKER_URL = config(
+        "CELERY_BROKER_URL", default="redis://localhost:6379", cast=str
+    )
+    CELERY_RESULT_BACKEND = config(
+        "CELERY_RESULT_BACKEND", default="redis://localhost:6379", cast=str
+    )
+    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", cast=str)
+    EMAIL_HOST_USER = config("EMAIL_HOST_USER", cast=str)
+    EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", cast=str)
 
 
 # print(metadata())

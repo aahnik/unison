@@ -77,11 +77,14 @@ INSTALLED_APPS = [
     "tester.apps.TesterConfig",
     "users.apps.UsersConfig",
     "haps",
+    "blog",
     # more third party apps
     # recommended to be placed at last
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "crispy_tailwind",
+    "ckeditor",
+    "ckeditor_uploader",
 ]
 
 MIDDLEWARE = [
@@ -145,6 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -205,3 +209,12 @@ LOGGING = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"
+CKEDITOR_UPLOAD_PATH = "ckeditor-uploads/"
+CKEDITOR_FILENAME_GENERATOR = "utils.ckeditor.get_filename"
+
+CELERY_BROKER_URL = MyDjS.CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = MyDjS.CELERY_RESULT_BACKEND
+
+DEFAULT_FROM_EMAIL = MyDjS.DEFAULT_FROM_EMAIL
+EMAIL_HOST_USER = MyDjS.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = MyDjS.EMAIL_HOST_PASSWORD
