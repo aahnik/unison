@@ -5,118 +5,195 @@
 <!-- content -->
 {% block content %}
 
-<div class="px-2 md:px-12 py-4">
-  <div
-    id="default-carousel"
-    class="relative w-full h-full"
-    data-carousel="slide"
-  >
+<div class="px-2 md:px-12 py-4 flex flex-wrap">
+  <div id="default-carousel" class="relative lg:w-1/2 w-full h-full " data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-80 overflow-hidden rounded-lg md:h-[28rem]">
       {% for image in carousel_images %}
       <div class="hidden duration-700 ease-in-out" data-carousel-item>
         <a href="{{ image.redirect_url }}">
-          <img
-            src="{{ image.image.url }}"
+          <img src="{{ image.image.url }}"
             class="absolute block h-full w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="{{image.alt_text}}"
-          />
+            alt="{{image.alt_text}}" />
         </a>
       </div>
       {% endfor %}
     </div>
     <!-- Slider indicators -->
-    <div
-      class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2"
-    >
+    <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
       {% for image in carousel_images %}
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="true"
-        aria-label="Slide 1"
-        data-carousel-slide-to="0"
-      ></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+        data-carousel-slide-to="0"></button>
       {% endfor %}
     </div>
     <!-- Slider controls -->
-    <button
-      type="button"
+    <button type="button"
       class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-      data-carousel-prev
-    >
+      data-carousel-prev>
       <span
-        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"
-          ></path>
+        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
         </svg>
         <span class="sr-only">Previous</span>
       </span>
     </button>
-    <button
-      type="button"
+    <button type="button"
       class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-      data-carousel-next
-    >
+      data-carousel-next>
       <span
-        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          ></path>
+        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
         <span class="sr-only">Next</span>
       </span>
     </button>
   </div>
+
+
+
+
+
+  <!-- upcoming events -->
+  <div class="lg:w-1/2 flex flex-wrap justify-center content-center items-center ">
+
+
+    <div class="py-4 px-4 w-full">
+      <h1
+        class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl  dark:text-white text-center">
+        Events
+      </h1>
+    </div>
+
+    <div class="py-4">
+      <a href="#"
+        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+          src="/docs/images/blog/image-4.jpg" alt="">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology
+            acquisitions 2021</h5>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
+            acquisitions of 2021 so far, in reverse chronological order.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="">
+      <a href="#"
+        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+          src="/docs/images/blog/image-4.jpg" alt="">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology
+            acquisitions 2021</h5>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
+            acquisitions of 2021 so far, in reverse chronological order.</p>
+        </div>
+      </a>
+    </div>
+
+
+
+  </div>
+
+
+
 </div>
 
+<!-- recent news -->
+
+<div>
+
+
+  <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+    <div class="px-4 mx-auto max-w-screen-xl">
+      <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Recent News</h2>
+      <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="max-w-xs">
+          <a href="#">
+            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-1.png" class="mb-5 rounded-lg"
+              alt="Image 1">
+          </a>
+          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+            <a href="#">Our first office</a>
+          </h2>
+          <p class="mb-4 text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
+            changes! After months of preparation.</p>
+          <a href="#"
+            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+            Read in 2 minutes
+          </a>
+        </article>
+        <article class="max-w-xs">
+          <a href="#">
+            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-2.png" class="mb-5 rounded-lg"
+              alt="Image 2">
+          </a>
+          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+            <a href="#">Enterprise design tips</a>
+          </h2>
+          <p class="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
+            changes! After months of preparation.</p>
+          <a href="#"
+            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+            Read in 12 minutes
+          </a>
+        </article>
+        <article class="max-w-xs">
+          <a href="#">
+            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-3.png" class="mb-5 rounded-lg"
+              alt="Image 3">
+          </a>
+          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+            <a href="#">We partnered with Google</a>
+          </h2>
+          <p class="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
+            changes! After months of preparation.</p>
+          <a href="#"
+            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+            Read in 8 minutes
+          </a>
+        </article>
+        <article class="max-w-xs">
+          <a href="#">
+            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-4.png" class="mb-5 rounded-lg"
+              alt="Image 4">
+          </a>
+          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+            <a href="#">Our first project with React</a>
+          </h2>
+          <p class="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
+            changes! After months of preparation.</p>
+          <a href="#"
+            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+            Read in 4 minutes
+          </a>
+        </article>
+      </div>
+    </div>
+  </aside>
+</div>
 <!-- activities -->
 
 <section class="bg-white dark:bg-gray-900">
   <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
     <div class="max-w-screen-md mb-8 lg:mb-16">
-      <h2
-        class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white"
-      >
+      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
         Activites at {{site_config.site_name}}
       </h2>
       <p class="text-gray-500 sm:text-xl dark:text-gray-400">
         {{home_content.activity_subhead}}
       </p>
     </div>
-    <div
-      class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0"
-    >
+    <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
       {% for activity in activities %}
       <div>
         <div
-          class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900"
-        >
+          class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
           <i class="{{ activity.fa_icon }}" style="color: #d97706"></i>
         </div>
         <h3 class="mb-2 text-xl font-bold dark:text-white">
@@ -138,42 +215,27 @@
 
     {% if not forloop.first %}
     <div class="grid md:grid-cols-2 gap-8">
-    {% endif %}
-      <div
-        class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12 mb-8"
-      >
-        <a
-          href="#"
-          class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-primary-400 mb-2"
-        >
+      {% endif %}
+      <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12 mb-8">
+        <a href="#"
+          class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-primary-400 mb-2">
           <i class="{{ cta0.fa_icon }} pr-2"></i>
           {{ cta0.cta_type }}
         </a>
-        <h1
-          class="text-gray-900 dark:text-white text-3xl md:text-5xl font-extrabold mb-2"
-        >
+        <h1 class="text-gray-900 dark:text-white text-3xl md:text-5xl font-extrabold mb-2">
           {{ cta0.title }}
         </h1>
         <p class="text-lg font-normal text-gray-500 dark:text-gray-400 mb-6">
           {{ cta0.description }}
         </p>
-        <a
-          href="{{cta0.link}}"
-          class="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
-        >
+        <a href="{{cta0.link}}"
+          class="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
           {{ cta0.button_text }}
-          <svg
-            aria-hidden="true"
-            class="ml-2 -mr-1 w-4 h-4"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
+          <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
               d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
+              clip-rule="evenodd"></path>
           </svg>
         </a>
       </div>
@@ -197,9 +259,7 @@
         <a href="{{ image.redirect_url }}">
           <img
             class="h-auto max-w-full rounded-lg ease-in-out hover:scale-125 transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
-            src="{{ image.image.url }}"
-            alt="{{ image.alt_text }}"
-          />
+            src="{{ image.image.url }}" alt="{{ image.alt_text }}" />
         </a>
       </div>
       {% endfor %}
@@ -211,71 +271,43 @@
 <br />
 
 <div class="w-full flex flex-row flex-wrap justify-around bg-gray-100">
-  <iframe
-    class="py-8 border-lg border-solid border-black"
-    src="{{ home_content.map_embed_url }}"
-    width="600"
-    height="450"
-    style="border: 0"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
+  <iframe class="py-8 border-lg border-solid border-black" src="{{ home_content.map_embed_url }}" width="600"
+    height="450" style="border: 0" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
 
   <section class="bg-gray-100 dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
       <div class="mx-auto max-w-screen-md sm:text-center">
-        <h2
-          class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white"
-        >
+        <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
           {{home_content.newsletter_signup_header}}
         </h2>
-        <p
-          class="mx-auto mb-8 max-w-2xl font-light text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400"
-        >
+        <p class="mx-auto mb-8 max-w-2xl font-light text-gray-500 md:mb-12 sm:text-xl dark:text-gray-400">
           {{home_content.newsletter_signup_subtitle}}
         </p>
         <form action="#">
-          <div
-            class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0"
-          >
+          <div class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
             <div class="relative w-full">
-              <label
-                for="email"
-                class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >Email address</label
-              >
-              <div
-                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
-              >
+              <label for="email" class="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email
+                address</label>
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                 <i class="{{home_content.newsletter_icon}}"></i>
               </div>
               <input
                 class="block p-3 pl-10 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="{{home_content.newsletter_signup_placeholder}}"
-                type="email"
-                id="email"
-                required=""
-              />
+                placeholder="{{home_content.newsletter_signup_placeholder}}" type="email" id="email" required="" />
             </div>
             <div>
-              <button
-                type="submit"
-                class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
+              <button type="submit"
+                class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 Subscribe
               </button>
             </div>
           </div>
           <div
-            class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300"
-          >
+            class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300">
             We care about the protection of your data.
-            <a
-              href="#"
-              class="font-medium text-primary-600 dark:text-primary-500 hover:underline"
-              >Read our Privacy Policy</a
-            >.
+            <a href="#" class="font-medium text-primary-600 dark:text-primary-500 hover:underline">Read our Privacy
+              Policy</a>.
           </div>
         </form>
       </div>
