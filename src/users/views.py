@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import get_user_model
 
-from .models import TempleWebUser
-from .forms import TempleWebUserCreationForm, UserLoginForm
+from .models import TempleWebUser, UserProfile
+from .forms import UserRegistrationForm, UserLoginForm
 
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
+
+User = get_user_model()
 
 
 def login_view(request: HttpRequest):
@@ -42,12 +45,31 @@ def me_view(request: HttpRequest):
 
 def register(request: HttpRequest):
     if request.method == "POST":
-        form = TempleWebUserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password1"]
+            user = User.objects.create_user(email, password)
+            user.first_name = form.cleaned_data["first_name"]
+            user.last_name = form.cleaned_data["last_name"]
+            user.save()
+
+            user_profile = UserProfile(
+                user=user,
+                address=form.cleaned_data["address"],
+                profession=form.cleaned_data["profession"],
+                whatsapp_number=form.cleaned_data["whatsapp_number"],
+            )
+            user_profile.save()
+
+            
             login(request, user)
             return redirect("users:me_view")
     else:
-        form = TempleWebUserCreationForm()
+        form = UserRegistrationForm()
 
     return render(request, "users/register.html", {"form": form})
+
+
+def forgot_password(request: HttpRequest):
+    pass
