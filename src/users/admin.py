@@ -14,7 +14,14 @@ class TempleWebAdminUserChangeForm(forms.ModelForm):
 
     class Meta:
         model = TempleWebUser
-        fields = ["email", "password", "is_superuser"]
+        fields = [
+            "first_name",
+            "last_name",
+            "is_staff",
+            "email",
+            "password",
+            "is_superuser",
+        ]
 
 
 class TempleWebUserAdmin(UserAdmin):
@@ -24,7 +31,21 @@ class TempleWebUserAdmin(UserAdmin):
     list_display = ["email", "is_superuser"]
     list_filter = ["is_superuser"]
 
-    fieldsets = [(None, {"fields": ["email", "password", "is_superuser"]})]
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": [
+                    "email",
+                    "password",
+                    "is_superuser",
+                    "first_name",
+                    "last_name",
+                    "is_staff",
+                ]
+            },
+        )
+    ]
 
     add_fieldsets = [
         (

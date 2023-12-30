@@ -20,7 +20,7 @@ class TempleWebUser(AbstractUser):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(TempleWebUser, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(upload_to=upload_image_to)
+    profile_pic = models.ImageField(upload_to=upload_image_to, null=True, blank=True)
     address = models.TextField(max_length=1024)
     profession = models.CharField(max_length=256)
     whatsapp_number = models.CharField(max_length=15)

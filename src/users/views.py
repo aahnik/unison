@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth import get_user_model
 
 from .models import TempleWebUser, UserProfile
-from .forms import UserRegistrationForm, UserLoginForm
+from .forms import UserRegistrationForm, UserLoginForm, UserProfileForm
 
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
@@ -39,8 +39,21 @@ def logout_view(request: HttpRequest):
 
 
 @login_required(login_url="/users/login")
-def me_view(request: HttpRequest):
-    return render(request, "users/profile.html", {"email": request.user.email})
+def me_view(request: HttpRequest, edit: str = "view"):
+    user_profile, truth = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+    else:
+        user_profile, truth = UserProfile.objects.get_or_create(user=request.user)
+        form = UserProfileForm(instance=user_profile)
+    return render(
+        request,
+        "users/profile.html",
+        {"form": form, "user": request.user, "user_profile": user_profile},
+    )
 
 
 def register(request: HttpRequest):
@@ -62,7 +75,6 @@ def register(request: HttpRequest):
             )
             user_profile.save()
 
-            
             login(request, user)
             return redirect("users:me_view")
     else:

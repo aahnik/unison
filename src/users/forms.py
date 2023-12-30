@@ -1,5 +1,5 @@
 from django import forms
-from .models import TempleWebUser
+from .models import TempleWebUser, UserProfile
 from django.core.exceptions import ValidationError
 
 
@@ -57,3 +57,9 @@ class UserRegistrationForm(forms.Form):
         if password1 and password2 and password1 != password2:
             raise ValidationError("Passwords don't match")
         return password2
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ["profile_pic", "address", "profession", "whatsapp_number"]
