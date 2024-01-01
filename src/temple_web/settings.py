@@ -74,7 +74,7 @@ INSTALLED_APPS = [
     # "donations.apps.OnlinePujaConfig",
     "activities.apps.ActivitiesConfig",
     "accounts.apps.AccountsConfig",
-    "tester.apps.TesterConfig",
+    # "tester.apps.TesterConfig",
     "users.apps.UsersConfig",
     "haps",
     "blog",
