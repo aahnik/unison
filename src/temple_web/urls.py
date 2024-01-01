@@ -35,7 +35,7 @@ urlpatterns = (
         # path("online-puja/", include("online_puja.urls")),
         path("activity/", include("activities.urls")),
         path("accounts/", include("accounts.urls")),
-        path("tester/", include("tester.urls")),
+        # path("tester/", include("tester.urls")),
         path("users/", include("users.urls")),
         path("events/", include("haps.urls")),
         path("blog/", include("blog.urls")),
