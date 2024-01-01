@@ -2,7 +2,6 @@
 Credits: https://w3sniff.com/code?id=102&title=Multi-Step-Form-with-Tailwind-CSS
 */
 
-console.log("hello");
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -76,10 +75,13 @@ function fixStepIndicator(n) {
   // This function removes the "active" class of all steps...
   console.log("fix step indicator");
   console.log(n);
-  var i;
-  var x = document.getElementsByClassName("stepIndicator");
-  var y = document.getElementsByClassName("stepIndicatorBorder");
-  for (i = 0; i < x.length; i++) {
+
+  let x = document.getElementsByClassName("stepIndicator");
+  let y = document.getElementsByClassName("stepIndicatorBorder");
+  console.log(i);
+  console.log(x);
+  console.log(y);
+  for (var i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(
       " text-primary-600 dark:text-primary-500",
       ""
@@ -89,9 +91,11 @@ function fixStepIndicator(n) {
       ""
     );
   }
+  console.log("jjj");
   //... and adds the "active" till the current step:
   for (i = 0; i <= n; i++) {
-    x[n].className += "  text-primary-600 dark:text-primary-500";
-    y[n].className += " border-primary-600 dark:border-primary-500";
+    console.log(`loop ${i}`);
+    x[i].className += "  text-primary-600 dark:text-primary-500";
+    y[i].className += " border-primary-600 dark:border-primary-500";
   }
 }
