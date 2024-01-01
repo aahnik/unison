@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.html import format_html
 from utils.images import upload_image_to
 from utils.slugs import generate_unique_slug
+from ckeditor_uploader.fields import RichTextUploadingField
 
 User = get_user_model()
 
@@ -17,9 +18,10 @@ class Event(models.Model):
     end_time = models.DateField(null=True, blank=True)
     accept_reg = models.BooleanField(verbose_name="Accepting registrations ?")
     show_on_home = models.BooleanField(verbose_name="Show on Home Page ?")
+    content = RichTextUploadingField(null=True, blank=True)
 
     def __str__(self):
-        return self.name + str(self.start_time)
+        return self.name + "  (" + str(self.start_time) + ")"
 
     def save(self, *args, **kwargs):
         if self.slug == "":
@@ -30,12 +32,16 @@ class Event(models.Model):
         return f"/events/{self.slug}"
 
     def event_page(self):
-        return format_html(f'<a href="{self.get_absolute_url()}" target="_blank">View Page</a>')
+        return format_html(
+            f'<a href="{self.get_absolute_url()}" target="_blank">View Page</a>'
+        )
 
 
 class EventRegistration(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    # regno = models.CharField(unique=True)
 
     def __str__(self) -> str:
         return self.user.__str__() + "%" + self.event.__str__()

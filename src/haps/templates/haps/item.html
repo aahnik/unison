@@ -1,0 +1,78 @@
+{% extends "commons.html" %}
+{% block title %} {{hap.name}} {% endblock title %}
+{%block content %}
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<section class="bg-white dark:bg-gray-900">
+    <div class="max-w-3xl flex px-4 py-8 mx-auto justify-around flex-wrap">
+        <div>
+            <img class="my-4 h-auto md:max-w-2xl sm:max-w-xl rounded-lg shadow-xl dark:shadow-gray-800"
+                src="{{hap.cover_image.url}}" alt="image description">
+        </div>
+
+        <div class="my-4 place-self-center text-center">
+            <h1
+                class="my-2 max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                {{hap.name}}
+            </h1>
+
+
+            <p class="mt-4 max-w-2xl mb-2 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                {{hap.description}}
+            </p>
+
+
+            <div class="md:text-lg lg:text-xl mb-8 text-gray-500  dark:text-gray-400 align-middle">
+
+                <div class="align-middle">
+                    <span class="material-symbols-outlined">
+                        event
+                    </span>
+                    <span> {{hap.start_time}}</span>
+                </div>
+
+                <div class="align-middle">
+                    <span class="material-symbols-outlined">
+                        location_on
+                    </span>
+                    <span class="">
+                        {{hap.venue}}
+                    </span>
+                </div>
+            </div>
+
+            <a href="{{hap.slug}}/register"
+                class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Register Now
+                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+            </a>
+            <a href="#"
+                class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                Contact us
+            </a>
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="px-4 py-8 w-full flex justify-center">
+        <div class="format format-lg w-full">
+            {{hap.content | safe}}
+        </div>
+    </div>
+
+
+
+</section>
+
+{% endblock %}

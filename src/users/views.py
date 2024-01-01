@@ -13,6 +13,8 @@ User = get_user_model()
 
 
 def login_view(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("users:me_view")
     if request.method == "POST":
         form = UserLoginForm(request.POST)
 
@@ -22,8 +24,11 @@ def login_view(request: HttpRequest):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("users:me_view")
-                # NOTE: name of the view needs to be as defined in urls.py urlpatters, and not the function name
+                next_view = request.GET.get("next", "users:me_view")
+                return redirect(next_view)
+                # NOTE:
+                # name of the view needs to be as defined in urls.py urlpatters,
+                # and not the function name
             else:
                 form.add_error(
                     None, ValidationError("Incorrect username or password")
@@ -46,6 +51,7 @@ def me_view(request: HttpRequest, edit: str = "view"):
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
+            return redirect("users:me_view")
     else:
         user_profile, truth = UserProfile.objects.get_or_create(user=request.user)
         form = UserProfileForm(instance=user_profile)
@@ -57,6 +63,9 @@ def me_view(request: HttpRequest, edit: str = "view"):
 
 
 def register(request: HttpRequest):
+    if request.user.is_authenticated:
+        return redirect("users:me_view")
+
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -76,7 +85,8 @@ def register(request: HttpRequest):
             user_profile.save()
 
             login(request, user)
-            return redirect("users:me_view")
+            next_view = request.GET.get("next", "users:me_view")
+            return redirect(next_view)
     else:
         form = UserRegistrationForm()
 

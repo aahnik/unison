@@ -48,7 +48,7 @@ class UserRegistrationForm(forms.Form):
     address = forms.CharField(max_length=1024)
     profession = forms.CharField(max_length=256)
     whatsapp_number = forms.CharField(max_length=15)
-    email = forms.CharField(max_length=128)
+    email = forms.EmailField(max_length=128)
 
     def clean_password2(self):
         # Check that the two password entries match

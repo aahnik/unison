@@ -23,6 +23,7 @@ class EventAdmin(admin.ModelAdmin):
         "end_time",
         "accept_reg",
         "show_on_home",
+        "content",
     ]
 
 
