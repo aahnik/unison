@@ -28,8 +28,8 @@ class TempleWebUserAdmin(UserAdmin):
     form = TempleWebAdminUserChangeForm
     add_form = TempleWebUserCreationForm
 
-    list_display = ["email", "is_superuser"]
-    list_filter = ["is_superuser"]
+    list_display = ["full_name", "email", "date_joined", "is_staff"]
+    list_filter = ["is_staff"]
 
     fieldsets = [
         (
@@ -38,13 +38,15 @@ class TempleWebUserAdmin(UserAdmin):
                 "fields": [
                     "email",
                     "password",
-                    "is_superuser",
                     "first_name",
                     "last_name",
-                    "is_staff",
                 ]
             },
-        )
+        ),
+        (
+            "Permissions",
+            {"fields": ["is_staff", "groups", "user_permissions"]},
+        ),
     ]
 
     add_fieldsets = [
@@ -52,7 +54,7 @@ class TempleWebUserAdmin(UserAdmin):
             None,
             {
                 "classes": ["wide"],
-                "fields": ["email", "password1", "password2", "is_superuser"],
+                "fields": ["email", "password1", "password2", "is_staff"],
             },
         )
     ]

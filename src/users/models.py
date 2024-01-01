@@ -17,6 +17,9 @@ class TempleWebUser(AbstractUser):
     def __str__(self):
         return self.email
 
+    def full_name(self):
+        return self.get_full_name()
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(TempleWebUser, on_delete=models.CASCADE)

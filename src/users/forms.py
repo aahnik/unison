@@ -13,7 +13,7 @@ class TempleWebUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = TempleWebUser
-        fields = ["email"]
+        fields = ["email", "is_staff", "first_name", "last_name"]
 
     def clean_password2(self):
         # Check that the two password entries match
