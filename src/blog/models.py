@@ -33,8 +33,8 @@ class BlogPost(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if self.author is None:
-            self.author = self.request.user
+        # if self.author is None:
+        #     self.author = self.request.user
         if self.slug == "":
             self.slug = generate_unique_slug(self.title, BlogPost)
         super().save(args, kwargs)

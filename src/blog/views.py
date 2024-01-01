@@ -18,8 +18,5 @@ def blog_item(request: HttpRequest, slug: str):
     blog = BlogPost.objects.get(slug=slug)
     context = {
         "blog": blog,
-        "author_name": "Aahnik",
-        "author_bio": "Nice work",
-        "date_pub": "9 Jan",
     }
     return render(request, "blog/item.html", context=context)
