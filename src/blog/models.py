@@ -4,6 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from utils.slugs import generate_unique_slug
 from django.utils.html import format_html
 from utils.images import upload_image_to
+from solo.models import SingletonModel
 
 User = get_user_model()
 
@@ -45,3 +46,8 @@ class BlogPost(models.Model):
         return format_html(
             f'<a href="{self.get_absolute_url()}" target="_blank">View Page</a>'
         )
+
+
+class BlogPageConfig(SingletonModel):
+    title = models.CharField(max_length=1024, default="Our Blog")
+    subtitle = models.TextField(max_length=4096, default="Here lives our blog")

@@ -1,8 +1,14 @@
 from django import forms
 from django.contrib import admin
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from solo.admin import SingletonModelAdmin
 
-from .models import BlogPost, BlogCategory
+from .models import BlogPost, BlogCategory, BlogPageConfig
+
+
+@admin.register(BlogPageConfig)
+class BlogPageConfigAdmin(SingletonModelAdmin):
+    pass
 
 
 @admin.register(BlogCategory)
