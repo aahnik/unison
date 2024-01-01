@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from ckeditor_uploader.fields import RichTextUploadingField
 from utils.slugs import generate_unique_slug
 from django.utils.html import format_html
+from utils.images import upload_image_to
 
 User = get_user_model()
 
@@ -19,8 +20,9 @@ class BlogPost(models.Model):
     category = models.ForeignKey(
         BlogCategory, null=True, blank=True, on_delete=models.SET_NULL
     )
+    cover_image = models.ImageField(upload_to=upload_image_to, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True)
-    summary = models.CharField(max_length=1024)
+    summary = models.TextField(max_length=1024)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     content = RichTextUploadingField()
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
