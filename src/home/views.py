@@ -3,6 +3,8 @@ from django.shortcuts import render
 
 from .models import CarouselImage, GalleryImage, HomeContent, CallToAction
 from activities.models import CommunityActivity
+from blog.models import BlogPost
+from haps.models import Event
 
 
 def index(request):
@@ -12,6 +14,8 @@ def index(request):
         "home_content": HomeContent.get_solo(),
         "activities": CommunityActivity.objects.all(),
         "ctas": CallToAction.objects.all(),
+        "blogs": BlogPost.objects.order_by("-created_at")[:4],
+        "haps": Event.objects.filter(show_on_home=True)[:2],
     }
     return render(request, "home/index.html", context=context)
 

@@ -63,38 +63,35 @@
 
     <div class="py-4 px-4 w-full">
       <h1
-        class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl  dark:text-white text-center">
+        class="mb-4 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-2xl  dark:text-white text-center">
         Events
       </h1>
     </div>
 
-    <div class="py-4">
-      <a href="#"
-        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="/docs/images/blog/image-4.jpg" alt="">
-        <div class="flex flex-col justify-between p-4 leading-normal">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology
-            acquisitions 2021</h5>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-            acquisitions of 2021 so far, in reverse chronological order.</p>
-        </div>
-      </a>
+    <div class="">
+      {% for hap in haps%}
+
+      <div class="my-6 w-full">
+        <a href="events/{{hap.slug}}"
+          class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+          {% if hap.cover_image %}
+          <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+            src="{{hap.cover_image.url}}" alt="">
+          {%endif%}
+          <div class="flex flex-col justify-between p-4 leading-normal">
+            <h5 class="mb-2 text-2xl font-medium tracking-tight text-gray-900 dark:text-white">
+              {{hap.name}}
+            </h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              {{hap.description}}
+            </p>
+          </div>
+        </a>
+      </div>
+
+      {%endfor%}
     </div>
 
-    <div class="">
-      <a href="#"
-        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="/docs/images/blog/image-4.jpg" alt="">
-        <div class="flex flex-col justify-between p-4 leading-normal">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology
-            acquisitions 2021</h5>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
-            acquisitions of 2021 so far, in reverse chronological order.</p>
-        </div>
-      </a>
-    </div>
 
 
 
@@ -113,66 +110,26 @@
     <div class="px-4 mx-auto max-w-screen-xl">
       <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Recent News</h2>
       <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+        {% for blog in blogs %}
         <article class="max-w-xs">
+          {% if blog.cover_image %}
           <a href="#">
-            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-1.png" class="mb-5 rounded-lg"
-              alt="Image 1">
+            <img src="{{blog.cover_image.url}}" class="mb-5 rounded-lg" alt="{{blog.title}}">
           </a>
+          {%endif%}
           <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-            <a href="#">Our first office</a>
+            <a href="blogs/{{blog.slug}}">{{blog.title}}</a>
           </h2>
-          <p class="mb-4 text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
-            changes! After months of preparation.</p>
-          <a href="#"
+          <p class="mb-4 text-gray-500 dark:text-gray-400">
+            {{blog.summary}}
+          </p>
+          <a href="blogs/{{blog.slug}}"
             class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-            Read in 2 minutes
+            Read more
           </a>
         </article>
-        <article class="max-w-xs">
-          <a href="#">
-            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-2.png" class="mb-5 rounded-lg"
-              alt="Image 2">
-          </a>
-          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-            <a href="#">Enterprise design tips</a>
-          </h2>
-          <p class="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
-            changes! After months of preparation.</p>
-          <a href="#"
-            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-            Read in 12 minutes
-          </a>
-        </article>
-        <article class="max-w-xs">
-          <a href="#">
-            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-3.png" class="mb-5 rounded-lg"
-              alt="Image 3">
-          </a>
-          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-            <a href="#">We partnered with Google</a>
-          </h2>
-          <p class="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
-            changes! After months of preparation.</p>
-          <a href="#"
-            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-            Read in 8 minutes
-          </a>
-        </article>
-        <article class="max-w-xs">
-          <a href="#">
-            <img src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-4.png" class="mb-5 rounded-lg"
-              alt="Image 4">
-          </a>
-          <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-            <a href="#">Our first project with React</a>
-          </h2>
-          <p class="mb-4  text-gray-500 dark:text-gray-400">Over the past year, Volosoft has undergone many
-            changes! After months of preparation.</p>
-          <a href="#"
-            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
-            Read in 4 minutes
-          </a>
-        </article>
+
+        {% endfor %}
       </div>
     </div>
   </aside>
