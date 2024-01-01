@@ -33,6 +33,7 @@ urlpatterns = (
         path("", include("home.urls")),
         path("donations/", include("donations.urls")),
         # path("online-puja/", include("online_puja.urls")),
+        path("activity/", include("activities.urls")),
         path("accounts/", include("accounts.urls")),
         path("tester/", include("tester.urls")),
         path("users/", include("users.urls")),
@@ -40,7 +41,7 @@ urlpatterns = (
         path("blog/", include("blog.urls")),
         # path("404/", views.page_not_found_view, name="404"),
         path("admin/", admin.site.urls),
-        path('ckeditor/', include('ckeditor_uploader.urls')),
+        path("ckeditor/", include("ckeditor_uploader.urls")),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

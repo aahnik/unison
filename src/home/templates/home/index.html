@@ -191,16 +191,24 @@
     </div>
     <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
       {% for activity in activities %}
-      <div>
+      <a href="activity/{{activity.slug}}">
         <div
-          class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-          <i class="{{ activity.fa_icon }}" style="color: #d97706"></i>
+          class="shadow-md border-b rounded-lg bg-gray-50  transform transition-transform duration-300 hover:translate-y-[-10px]">
+
+          <div class="px-4 py-4">
+            <h3 class=" mb-2 text-xl font-bold dark:text-white text-center">
+              {{activity.title}}
+
+            </h3>
+            {% if activity.cover_image %}
+            <img class="my-4 h-auto max-w-s rounded-lg shadow-xl dark:shadow-gray-800"
+              src="{{activity.cover_image.url}}" alt="">
+            {% endif %}
+            <p class="text-gray-500 dark:text-gray-400">{{ activity.summary }}</p>
+          </div>
+
         </div>
-        <h3 class="mb-2 text-xl font-bold dark:text-white">
-          {{activity.title}}
-        </h3>
-        <p class="text-gray-500 dark:text-gray-400">{{ activity.summary }}</p>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
