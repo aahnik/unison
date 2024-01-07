@@ -29,6 +29,7 @@ class TempleWebUserAdmin(UserAdmin):
     add_form = TempleWebUserCreationForm
 
     list_display = ["full_name", "email", "date_joined", "is_staff", "profile_link"]
+    list_display_links = ["full_name", "email"]
     list_filter = ["is_staff"]
 
     fieldsets = [
