@@ -1,7 +1,7 @@
 {% extends "commons.html" %}
 
 <!-- title -->
-{% block title %} Profile {% endblock title %}
+{% block title %} {{user.full_name}} {% endblock title %}
 
 <!-- content -->
 
@@ -14,7 +14,7 @@
       <img class="w-24 h-24 mb-3 rounded-full shadow-lg" {% if user_profile.profile_pic %}
         src="{{user_profile.profile_pic.url}}" {% else %} src="" {% endif %} alt="User Profile Image" />
       <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-        {{user.first_name}} {{user.last_name}}
+        {{user.full_name}}
       </h5>
       <span class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</span>
       <form enctype="multipart/form-data" method="post">

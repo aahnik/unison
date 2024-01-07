@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from utils.images import upload_image_to
-
+from django.utils.html import format_html
 from .managers import TempleWebUserManager
 
 
@@ -19,6 +19,11 @@ class TempleWebUser(AbstractUser):
 
     def full_name(self):
         return self.get_full_name()
+
+    def profile_link(self):
+        return format_html(
+            f'<a href="/users/profile/{self.email}" target="_blank">View User Profile</a>'
+        )
 
 
 class UserProfile(models.Model):

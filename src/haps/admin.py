@@ -30,5 +30,5 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(EventRegistration)
 class EventRegistrationAdmin(admin.ModelAdmin):
     search_fields = ["event", "user"]
-    list_display = ["user", "event"]
+    list_display = ["event", "user_name", "user_whatsapp", "user", "user_profile_link"]
     list_filter = ["event__name"]

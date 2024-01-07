@@ -8,6 +8,8 @@ from .forms import UserRegistrationForm, UserLoginForm, UserProfileForm
 
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
+from utils.adirect import adirect
 
 User = get_user_model()
 
@@ -53,7 +55,7 @@ def me_view(request: HttpRequest, edit: str = "view"):
             form.save()
             return redirect("users:me_view")
     else:
-        user_profile, truth = UserProfile.objects.get_or_create(user=request.user)
+        # user_profile, truth = UserProfile.objects.get_or_create(user=request.user)
         form = UserProfileForm(instance=user_profile)
     return render(
         request,
@@ -95,3 +97,22 @@ def register(request: HttpRequest):
 
 def forgot_password(request: HttpRequest):
     pass
+
+
+@permission_required("is_superuser", login_url="/users/login")
+def user_profile(request: HttpRequest, email: str):
+    user = User.objects.get(email=email)
+    user_profile, t = UserProfile.objects.get_or_create(user=user)
+
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect("users:profile", email=email)
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(
+        request,
+        "users/profile.html",
+        {"form": form, "user": user, "user_profile": user_profile},
+    )
