@@ -149,6 +149,7 @@ class HomeContent(SingletonModel):
         choices=NEWSLETTER_ICON_CHOICES,
         default=NEWSLETTER_ICON_CHOICES[1][0],
     )
+    activity_heading = models.CharField(max_length=256, default="Activities")
     activity_subhead = models.CharField(
         max_length=512,
         default="Here at Temple we focus on overall wellbeing and development.",

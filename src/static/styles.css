@@ -4655,6 +4655,11 @@ input:checked + .toggle-bg {
     line-height: 1.75rem;
   }
 
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
   .md\:text-primary-700 {
     --tw-text-opacity: 1;
     color: rgb(180 83 9 / var(--tw-text-opacity));
