@@ -53,7 +53,7 @@
 
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Create an account
+            Create your account
           </h1>
           <form id="multiStepForm" class="space-y-4 md:space-y-6" method="post">
             {% csrf_token %}
@@ -149,7 +149,7 @@
               </div>
               <div class="mb-4">
                 <label for="password"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Set a new Password</label>
                 <input type="password" name="password1" id="id_password1" value="{{form.password1.value | default:''}}"
                   placeholder=""
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -157,7 +157,7 @@
               </div>
               <div class="mb-4">
                 <label for="confirm-password"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm your password</label>
                 <input type="password" name="password2" id="id_password2" value="{{form.password2.value | default:''}}"
                   placeholder=""
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"

@@ -3,6 +3,7 @@ from django.db import models
 from utils.images import upload_image_to
 from django.utils.html import format_html
 from .managers import TempleWebUserManager
+from solo.models import SingletonModel
 
 
 class TempleWebUser(AbstractUser):
