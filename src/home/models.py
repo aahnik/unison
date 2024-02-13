@@ -154,6 +154,7 @@ class HomeContent(SingletonModel):
         max_length=512,
         default="Here at Temple we focus on overall wellbeing and development.",
     )
+    blog_count = models.PositiveIntegerField(default=4)
 
 
 class SiteConfig(SingletonModel):
