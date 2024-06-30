@@ -121,6 +121,7 @@ def get_callback_url(request: HttpRequest):
 
 
 def make_donation(request: HttpRequest):
+    context = {}
     if request.method == "POST":
         form = DonationForm(request.POST)
         if form.is_valid():
@@ -167,6 +168,7 @@ def make_donation(request: HttpRequest):
         if tier_id is not None:
             try:
                 donation_tier = DonationTier.objects.get(id=tier_id)
+                context["selected_tier"] = donation_tier
             except DonationTier.DoesNotExist:
                 raise Http404("This donation tier does not exist. Try again.")
 
@@ -177,4 +179,10 @@ def make_donation(request: HttpRequest):
                 }
             )
         form = DonationForm(initial=pre_filled_data)
-    return render(request, "donations/donation_form.html", {"form": form})
+
+    context["form"] = form
+    return render(
+        request,
+        "donations/donation_form.html",
+        context=context,
+    )
