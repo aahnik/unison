@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 def donations(request):
     donation_config = DonationConfig.get_solo()
-    donation_tiers = DonationTier.objects.all()
+    donation_tiers = DonationTier.objects.filter(visible=True)
     context = {"donation_config": donation_config, "donation_tiers": donation_tiers}
     return render(request, "donations/donations.html", context=context)
 
