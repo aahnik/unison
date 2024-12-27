@@ -21,7 +21,7 @@ class DonationTier(models.Model):
     name = models.CharField(max_length=256)
     description = models.CharField(max_length=1024)
     amount = models.PositiveIntegerField(validators=[MaxValueValidator(10000)])
-    visible = models.BooleanField(default=False)
+    visible = models.BooleanField(verbose_name="Show on Donations Page ?", default=False)
 
     def __str__(self):
         return self.name
