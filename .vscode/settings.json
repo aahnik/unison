@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "*.html": "jinja-html"
-  }
+    "*.html": "django-html"
+  },
+  "python.languageServer": "None"
 }
