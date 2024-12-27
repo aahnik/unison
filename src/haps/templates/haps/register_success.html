@@ -1,12 +1,12 @@
 {% extends "commons.html" %}
 
 {% block title %} {{ event.name }} {% endblock title %}
+{% load haps_extras %}
 
 
 {% block content %}
-
-<div class="bg-gray-100 h-screen">
-    <div class="bg-white p-6  md:mx-auto">
+<div class="bg-gray-100 min-h-screen py-8">
+    <div class="bg-white p-6 md:mx-auto max-w-2xl rounded-lg shadow">
         <svg viewBox="0 0 24 24" class="text-green-600 w-16 h-16 mx-auto my-6">
             <path fill="currentColor"
                 d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
@@ -14,91 +14,135 @@
         </svg>
         <div class="text-center">
             <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Registration Done!</h3>
-            <p class="text-gray-600 my-2">Thank you for completing your registration for event</p>
-            <p> Looking forward to see you in the event! </p>
-
+            <p class="text-gray-600 my-2">Thank you for completing your registration.</p>
+            <p class="text-gray-600">Registration #{{registration.id}}</p>
+            <p class="text-gray-600"> Looking forward to seeing you at the event! </p>
         </div>
 
+        <div class="my-8">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Event
+                        </th>
+                        <td class="px-6 py-4">
+                            {{event.name}}
+                        </td>
+                    </tr>
 
-        <div class="flex justify-center my-4">
-            <div class="max-w-2xl  text-center">
-                <table class="w-full text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Name
+                        </th>
+                        <td class="px-6 py-4">
+                            {% if registration.user %}
+                                {{registration.user.get_full_name}}
+                            {% else %}
+                                {{registration.form_responses.name}}
+                            {% endif %}
+                        </td>
+                    </tr>
 
-                    <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Event
-                            </th>
-                            <td class="px-6 py-4">
-                                {{event.name}}
-                            </td>
+                    {% if registration.user %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Email
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.user.email}}
+                        </td>
+                    </tr>
+                    {% endif %}
 
-                        </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Name
-                            </th>
-                            <td class="px-6 py-4">
-                                {{user.first_name}} {{user.last_name}}
-                            </td>
+                    {% if not registration.user %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            WhatsApp
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.form_responses.whatsapp_number}}
+                        </td>
+                    </tr>
+                    {% endif %}
 
-                        </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Email
-                            </th>
-                            <td class="px-6 py-4">
-                                {{user.email}}
-                            </td>
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Date
+                        </th>
+                        <td class="px-6 py-4">
+                            {{event.start_time}}
+                        </td>
+                    </tr>
 
-                        </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Venue
+                        </th>
+                        <td class="px-6 py-4">
+                            {{event.venue}}
+                        </td>
+                    </tr>
 
-                        <tr class="bg-white border-b dark:bg-gray-800">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Date
-                            </th>
-                            <td class="px-6 py-4">
-                                {{event.start_time}}
-                            </td>
+                    {% if registration.datetime %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Registration Time
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.datetime}}
+                        </td>
+                    </tr>
+                    {% endif %}
 
-                        </tr>
+                    {% if event.registration_fee %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Registration Fee
+                        </th>
+                        <td class="px-6 py-4">
+                            ₹{{event.registration_fee}}
+                            <span class="ml-2 text-xs px-2 py-1 rounded-full
+                                {% if registration.payment_status == 'success' %}
+                                    bg-green-100 text-green-800
+                                {% elif registration.payment_status == 'pending' %}
+                                    bg-yellow-100 text-yellow-800
+                                {% else %}
+                                    bg-red-100 text-red-800
+                                {% endif %}">
+                                {{registration.payment_status|title}}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endif %}
 
-                        <tr class="bg-white border-b dark:bg-gray-800">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Venue
-                            </th>
-                            <td class="px-6 py-4">
-                                {{event.venue}}
-                            </td>
-
-                        </tr>
-                        {# show registration date time #}
-                    </tbody>
-                </table>
-            </div>
-
-
-
+                    {% for field in event.form_fields.all %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{field.field_label}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.form_responses|get_item:field.field_label}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
 
-        <div class="my-4 flex justify-center">
-            <a href="{{hap.slug}}">
-                <button type="button"
-                    class="my-4 text-white bg-primary-700 hover:bg-primary-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                    Print PDF
-                </button>
+        <div class="flex justify-center space-x-4">
+            {% if event.registration_fee and registration.payment_status == 'pending' %}
+            <a href="{% url 'donations:payment' registration_id=registration.id %}"
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                Pay Now
             </a>
+            {% endif %}
 
+            <button type="button" onclick="handlePrint()"
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                Print
+            </button>
         </div>
-
-
-
     </div>
 </div>
-
 {% endblock content %}
