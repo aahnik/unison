@@ -7,8 +7,14 @@
 <section class="bg-white dark:bg-gray-900">
     <div class="max-w-3xl flex px-4 py-8 mx-auto justify-around flex-wrap">
         <div>
-            <img class="my-4 h-auto md:max-w-2xl sm:max-w-xl rounded-lg shadow-xl dark:shadow-gray-800"
-                src="{{hap.cover_image.url}}" alt="image description">
+            {% if hap.cover_image %}
+                <img class="my-4 h-auto md:max-w-2xl sm:max-w-xl rounded-lg shadow-xl dark:shadow-gray-800"
+                    src="{{hap.cover_image.url}}" alt="{{hap.name}} cover image">
+            {% else %}
+                <div class="my-4 h-64 w-96 rounded-lg shadow-xl dark:shadow-gray-800 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-6xl text-gray-400 dark:text-gray-600">event</span>
+                </div>
+            {% endif %}
         </div>
 
         <div class="my-4 place-self-center text-center">
@@ -17,62 +23,141 @@
                 {{hap.name}}
             </h1>
 
-
             <p class="mt-4 max-w-2xl mb-2 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                 {{hap.description}}
             </p>
 
-
             <div class="md:text-lg lg:text-xl mb-8 text-gray-500  dark:text-gray-400 align-middle">
-
                 <div class="align-middle">
-                    <span class="material-symbols-outlined">
-                        event
-                    </span>
+                    <span class="material-symbols-outlined">event</span>
                     <span> {{hap.start_time}}</span>
                 </div>
 
                 <div class="align-middle">
-                    <span class="material-symbols-outlined">
-                        location_on
-                    </span>
-                    <span class="">
-                        {{hap.venue}}
-                    </span>
+                    <span class="material-symbols-outlined">location_on</span>
+                    <span class="">{{hap.venue}}</span>
                 </div>
+
+                {% if hap.registration_fee %}
+                <div class="align-middle mt-2">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span class="">Registration Fee: ₹{{hap.registration_fee}}</span>
+                </div>
+                {% endif %}
             </div>
 
-            <a href="{{hap.slug}}/register"
-                class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                Register Now
-                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                        clip-rule="evenodd">
-                    </path>
-                </svg>
-            </a>
-            <a href="#"
-                class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                Contact us
-            </a>
+            {% if hap.accept_reg %}
+                {% if hap.login_required and not user.is_authenticated %}
+                    <a href="{% url 'users:register' %}?next={{ request.path }}"
+                        class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        Login to Register
+                        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                {% else %}
+                    <button data-modal-target="registration-modal" data-modal-toggle="registration-modal"
+                        class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        Register Now
+                        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                {% endif %}
+            {% endif %}
         </div>
-
-
-
-
-
     </div>
 
-    <div class="px-4 py-8 w-full flex justify-center">
-        <div class="format format-lg w-full">
-            {{hap.content | safe}}
-        </div>
+    {% if hap.content %}
+    <div class="max-w-3xl mx-auto px-4 py-8">
+        {{hap.content|safe}}
     </div>
-
-
-
+    {% endif %}
 </section>
 
-{% endblock %}
+<!-- Registration Modal -->
+<div id="registration-modal" tabindex="-1" aria-hidden="true"
+    class="hidden fixed top-0 right-0 left-0 z-50 w-full h-full flex items-center justify-center bg-gray-900/50 backdrop-blur-lg">
+    <div class="relative w-full max-w-md p-4">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Register for {{hap.name}}
+                </h3>
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-toggle="registration-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+
+            <form class="p-4 md:p-5" method="post" action="{{hap.slug}}/register">
+                {% csrf_token %}
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                    {% if not hap.login_required %}
+                    <div class="col-span-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
+                        <input type="text" name="name" id="name" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Your full name">
+                    </div>
+                    <div class="col-span-2">
+                        <label for="whatsapp_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">WhatsApp Number</label>
+                        <input type="tel" name="whatsapp_number" id="whatsapp_number" required pattern="[0-9]{10}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="10 digit number">
+                    </div>
+                    {% endif %}
+
+                    {% for field in hap.form_fields.all %}
+                    <div class="col-span-2">
+                        <label for="field_{{field.id}}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{field.field_label}}
+                            {% if field.help_text %}
+                            <span class="text-xs text-gray-500">({{field.help_text}})</span>
+                            {% endif %}
+                        </label>
+
+                        {% if field.field_type == 'textarea' %}
+                        <textarea id="field_{{field.id}}" name="field_{{field.id}}" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            {% if field.required %}required{% endif %}></textarea>
+                        {% else %}
+                        <input type="{{field.field_type}}" name="field_{{field.id}}" id="field_{{field.id}}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            {% if field.required %}required{% endif %}>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if hap.registration_fee %}
+                <div class="mb-4">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        A registration fee of ₹{{hap.registration_fee}} will be collected after form submission.
+                    </p>
+                </div>
+                {% endif %}
+
+                <div class="flex justify-end">
+                    <button type="submit"
+                        class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
