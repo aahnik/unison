@@ -55,6 +55,7 @@ class EventAdmin(admin.ModelAdmin):
 class EventRegistrationAdmin(admin.ModelAdmin):
     search_fields = ["event__name", "user__email", "order_id"]
     list_display = [
+        "registration_number",
         "event",
         "user_name",
         "user_whatsapp",
@@ -71,3 +72,7 @@ class EventRegistrationAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('event', 'user')
+
+    def registration_number(self, obj):
+        return f"#{obj.id}"
+    registration_number.short_description = "Registration No."
