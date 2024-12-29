@@ -4,7 +4,7 @@ from django.urls import reverse
 from .forms import DonationForm
 from .models import DonationConfig, DonationTier, DonationReceived
 from temple_web.myconfig import PaymentGatewayConfig
-from .upi_gateway import create_order, check_order_status
+from utils.payment.upi_gateway import create_order, check_order_status
 from uuid import uuid4
 from datetime import date
 from utils.adirect import adirect
@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 def donations(request):
     donation_config = DonationConfig.get_solo()
-    donation_tiers = DonationTier.objects.all()
+    donation_tiers = DonationTier.objects.filter(visible=True)
     context = {"donation_config": donation_config, "donation_tiers": donation_tiers}
     return render(request, "donations/donations.html", context=context)
 

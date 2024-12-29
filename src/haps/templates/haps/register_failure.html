@@ -1,22 +1,22 @@
 {% extends "commons.html" %}
 
-{% block title %} {{ event.name }} {% endblock title %}
+{% block title %} {{ event.name }} - Registration Failed {% endblock title %}
 {% load haps_extras %}
-
 
 {% block content %}
 <div class="bg-gray-100 min-h-screen py-8">
     <div class="bg-white p-6 md:mx-auto max-w-2xl rounded-lg shadow">
-        <svg viewBox="0 0 24 24" class="text-green-600 w-16 h-16 mx-auto my-6">
-            <path fill="currentColor"
-                d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z">
-            </path>
-        </svg>
+        <div class="text-red-600 w-16 h-16 mx-auto my-6">
+            <i class="fa-regular fa-circle-xmark fa-3x"></i>
+        </div>
+
         <div class="text-center">
-            <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Registration Done!</h3>
-            <p class="text-gray-600 my-2">Thank you for completing your registration.</p>
+            <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Registration Failed!</h3>
+            <p class="text-gray-600 my-2">Your registration for the event is incomplete due to payment failure.</p>
             <p class="text-gray-600">Registration #{{registration.id}}</p>
-            <p class="text-gray-600"> Looking forward to seeing you at the event! </p>
+            {% if remark %}
+            <p class="text-red-600 mt-2">{{remark}}</p>
+            {% endif %}
         </div>
 
         <div class="my-8">
@@ -37,9 +37,9 @@
                         </th>
                         <td class="px-6 py-4">
                             {% if registration.user %}
-                                {{registration.user.get_full_name}}
+                                {{registration.user.get_full_name|default:"Anonymous User"}}
                             {% else %}
-                                {{registration.form_responses.name}}
+                                {{registration.form_responses.name|default:"Anonymous User"}}
                             {% endif %}
                         </td>
                     </tr>
@@ -95,26 +95,17 @@
                     </tr>
                     {% endif %}
 
-                    {% if event.registration_fee %}
                     <tr class="bg-white border-b dark:bg-gray-800">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             Registration Fee
                         </th>
                         <td class="px-6 py-4">
                             ₹{{event.registration_fee}}
-                            <span class="ml-2 text-xs px-2 py-1 rounded-full
-                                {% if registration.payment_status == 'success' %}
-                                    bg-green-100 text-green-800
-                                {% elif registration.payment_status == 'pending' %}
-                                    bg-yellow-100 text-yellow-800
-                                {% else %}
-                                    bg-red-100 text-red-800
-                                {% endif %}">
-                                {{registration.payment_status|title}}
+                            <span class="ml-2 text-xs px-2 py-1 rounded-full bg-red-100 text-red-800">
+                                Payment Failed
                             </span>
                         </td>
                     </tr>
-                    {% endif %}
 
                     {% for field in event.form_fields.all %}
                     <tr class="bg-white border-b dark:bg-gray-800">
@@ -131,17 +122,15 @@
         </div>
 
         <div class="flex justify-center space-x-4">
-            {% if event.registration_fee and registration.payment_status == 'pending' %}
-            <a href="{% url 'donations:payment' registration_id=registration.id %}"
+            <a href="{% url 'haps:retry_payment' registration_id=registration.id %}"
                 class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                Pay Now
+                Retry Payment
             </a>
-            {% endif %}
 
-            <button type="button" onclick="handlePrint()"
-                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                Print
-            </button>
+            <a href="{% url 'haps:event_item' slug=event.slug %}"
+                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                Back to Event
+            </a>
         </div>
     </div>
 </div>
