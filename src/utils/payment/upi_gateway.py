@@ -40,6 +40,8 @@ def create_order(
     """
     if not customer_email:
         customer_email = "example@example.com"
+    if not customer_mobile:
+        customer_mobile = "9999999999"
     payload_dict = {
         "key": str(PaymentGatewayConfig.API_KEY),
         "client_txn_id": client_txn_id,
@@ -55,19 +57,25 @@ def create_order(
 
     payload_json_str = json.dumps(payload_dict)
 
+    log.info(f"making payment request for {amount=} and {client_txn_id=}")
+    log.debug(payload_dict)
+
     response = requests.request(
         "POST",
         PaymentGatewayConfig.CREATE_ORDER,
         headers=PaymentGatewayConfig.REQUEST_HEADERS,
         data=payload_json_str,
     )
-
+    log.debug(response.text)
     if response.status_code == 200:
         rj = response.json()
         if rj["status"] is True:
+            log.warning(rj)
             return True, rj["data"]
         else:
             log.warning("Failed to create order \n%s", response.text)
+            log.warning("rj[data]", rj["data"])
+            log.warning("rj", rj)
             return False, response
     else:
         log.warning(
