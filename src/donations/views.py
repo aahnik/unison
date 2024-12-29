@@ -4,7 +4,7 @@ from django.urls import reverse
 from .forms import DonationForm
 from .models import DonationConfig, DonationTier, DonationReceived
 from temple_web.myconfig import PaymentGatewayConfig
-from .upi_gateway import create_order, check_order_status
+from utils.payment.upi_gateway import create_order, check_order_status
 from uuid import uuid4
 from datetime import date
 from utils.adirect import adirect

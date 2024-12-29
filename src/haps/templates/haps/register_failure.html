@@ -1,0 +1,137 @@
+{% extends "commons.html" %}
+
+{% block title %} {{ event.name }} - Registration Failed {% endblock title %}
+{% load haps_extras %}
+
+{% block content %}
+<div class="bg-gray-100 min-h-screen py-8">
+    <div class="bg-white p-6 md:mx-auto max-w-2xl rounded-lg shadow">
+        <div class="text-red-600 w-16 h-16 mx-auto my-6">
+            <i class="fa-regular fa-circle-xmark fa-3x"></i>
+        </div>
+
+        <div class="text-center">
+            <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Registration Failed!</h3>
+            <p class="text-gray-600 my-2">Your registration for the event is incomplete due to payment failure.</p>
+            <p class="text-gray-600">Registration #{{registration.id}}</p>
+            {% if remark %}
+            <p class="text-red-600 mt-2">{{remark}}</p>
+            {% endif %}
+        </div>
+
+        <div class="my-8">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Event
+                        </th>
+                        <td class="px-6 py-4">
+                            {{event.name}}
+                        </td>
+                    </tr>
+
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Name
+                        </th>
+                        <td class="px-6 py-4">
+                            {% if registration.user %}
+                                {{registration.user.get_full_name|default:"Anonymous User"}}
+                            {% else %}
+                                {{registration.form_responses.name|default:"Anonymous User"}}
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    {% if registration.user %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Email
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.user.email}}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    {% if not registration.user %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            WhatsApp
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.form_responses.whatsapp_number}}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Date
+                        </th>
+                        <td class="px-6 py-4">
+                            {{event.start_time}}
+                        </td>
+                    </tr>
+
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Venue
+                        </th>
+                        <td class="px-6 py-4">
+                            {{event.venue}}
+                        </td>
+                    </tr>
+
+                    {% if registration.datetime %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Registration Time
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.datetime}}
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Registration Fee
+                        </th>
+                        <td class="px-6 py-4">
+                            ₹{{event.registration_fee}}
+                            <span class="ml-2 text-xs px-2 py-1 rounded-full bg-red-100 text-red-800">
+                                Payment Failed
+                            </span>
+                        </td>
+                    </tr>
+
+                    {% for field in event.form_fields.all %}
+                    <tr class="bg-white border-b dark:bg-gray-800">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{field.field_label}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{registration.form_responses|get_item:field.field_label}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex justify-center space-x-4">
+            <a href="{% url 'haps:retry_payment' registration_id=registration.id %}"
+                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                Retry Payment
+            </a>
+
+            <a href="{% url 'haps:event_item' slug=event.slug %}"
+                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                Back to Event
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

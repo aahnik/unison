@@ -75,12 +75,39 @@ class EventRegistration(models.Model):
     datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     form_responses = models.JSONField(default=dict)
     amount = models.PositiveIntegerField(null=True, blank=True)
+
+    # Payment related fields
     payment_status = models.CharField(
         max_length=10,
         choices=PAYMENT_STATUS_CHOICES,
         default='pending'
     )
     order_id = models.CharField(max_length=100, blank=True, null=True)
+    client_txn_id = models.CharField(max_length=128, unique=True, db_index=True, null=True, blank=True)
+    payment_date_time = models.DateTimeField(null=True, blank=True)
+
+    # Payment diagnostic data from UPI gateway
+    payment_data = models.JSONField(default=dict, help_text="""
+    Stores payment-related data from UPI gateway including:
+    - customer_vpa: Customer's UPI ID
+    - upi_txn_id: UPI transaction ID
+    - status: Detailed payment status
+    - remark: Payment remarks/failure reason
+    - txnAt: Transaction timestamp
+    - merchant: Merchant details (name, upi_id)
+    - udf1, udf2, udf3: User defined fields
+    - redirect_url: Payment redirect URL
+    - createdAt: Order creation time
+    """)
+
+    def __str__(self):
+        return f"Registration #{self.id} - {self.event.name}"
+
+    @property
+    def registration_number(self):
+        """Returns a formatted registration number."""
+        return f"#{self.id}"
+
 
     def user_name(self):
         if self.user:
