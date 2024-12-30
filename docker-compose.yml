@@ -6,7 +6,7 @@ services:
              python src/manage.py ensure_superuser &&
              python src/manage.py runserver 0.0.0.0:8000"
     volumes:
-      - unison:/app
+      - unison:/data
     ports:
       - "${APP_BIND_PORT:-8234}:8000"
     env_file:
