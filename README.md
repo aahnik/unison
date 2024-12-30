@@ -91,6 +91,30 @@ Other than extensively refering to the Django documentation, I found these artic
 
 ## Deployment Guide
 
+### Raw Server Deployments
+
 - [Basic server configuration](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-22-04)
 - [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-22-04)
 - [Setup SSL certificate for HTTPS](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04)
+
+
+### Coolify using Dockerfile
+
+Coolify supports docker-compose also, but as of writing this, docker compose deployments are unstable, and cause gateway timeout issues due to improper configuration in the proxy.
+
+Using Dockerfile as deployment method is recommended in Coolify.
+
+First of all deploy a Postgres instance on coolify and make it publicly accessible. Obviously set a very long password. Making the db accessible over internet can help you debug from local machine, and also  coolify has some issues with resolving internal addresses when put in env vars. Once the db is deployed copy the values for db host, username, pass and port.
+
+
+Now deploy the actual app via Dockerfile, and set all the environment variables properly.
+
+
+Some important settings to be performed from coolify GUI
+
+- **General** tab --> **Network** section --> Port exposes: 8000
+- Setup the domains, and add them to apt env vars `MORE_ALLOWED_HOSTS` and `PROD`
+- **Storages** tab --> Add --> Volume mount
+  - source: a suitable path in your host filesystem
+  - dest: `/data` (if you change this, you need to change `PROD_FILES_ROOT`)
+To persist static data between deployments, setup a
