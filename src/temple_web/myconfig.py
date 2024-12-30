@@ -30,7 +30,7 @@ class PaymentGatewayConfig:
 class MyDjangoSettings:
     DEBUG = config("DEBUG", default=False, cast=bool)
     PROD = config("PROD", default=False, cast=bool)
-    PROD_FILES_ROOT = config("PROD_FILES_ROOT", default="/app/data/", cast=str)
+    PROD_FILES_ROOT = config("PROD_FILES_ROOT", default="/data/", cast=str)
     PROD_DOMAIN = config("PROD_DOMAIN", cast=str)
     SECRET_KEY = config("SECRET_KEY", cast=str)
     MORE_ALLOWED_HOSTS = config("MORE_ALLOWED_HOSTS", cast=Csv(), default="127.0.0.1")
