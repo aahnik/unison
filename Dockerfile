@@ -40,7 +40,7 @@ RUN useradd -m appuser && chown -R appuser:appuser /app
 RUN mkdir -p /data && \
     chown -R appuser:appuser /data
 
-USER appuser
+# USER appuser
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
