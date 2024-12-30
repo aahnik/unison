@@ -16,12 +16,10 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.conf.urls import handler404
-
-
-# from django.contrib import admin
-from .admin import admin
+from django.contrib import admin
 from django.urls import include, path
 from temple_web import views
+from .admin import admin
 from . import settings
 from . import views
 
@@ -30,6 +28,9 @@ handler404 = views.page_not_found_view
 
 urlpatterns = (
     [
+        # Health check endpoint
+        path('health/', views.health_check, name='health_check'),
+        
         path("", include("home.urls")),
         path("donations/", include("donations.urls")),
         # path("online-puja/", include("online_puja.urls")),

@@ -21,6 +21,7 @@ crispy-tailwind = "^0.5.0"
 django-ckeditor = "^6.7.0"
 celery = "^5.3.6"
 redis = "^5.0.1"
+whitenoise = "^6.8.2"
 
 
 [tool.poetry.group.dev.dependencies]
