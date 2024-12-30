@@ -29,6 +29,9 @@ RUN pip install --upgrade pip && \
 # Copy project files
 COPY . .
 
+# Make entrypoint script executable
+RUN chmod +x /app/entrypoint.sh
+
 # Create a non-root user
 RUN useradd -m appuser && chown -R appuser:appuser /app
 USER appuser
@@ -40,5 +43,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Expose port
 EXPOSE 8000
 
-# Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "--timeout", "120", "--keep-alive", "5", "--max-requests", "1000", "--chdir", "src", "temple_web.wsgi:application"]
+# Set entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
