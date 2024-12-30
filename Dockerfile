@@ -38,9 +38,10 @@ RUN useradd -m appuser && chown -R appuser:appuser /app
 
 # Create data directory with correct permissions
 RUN mkdir -p /data && \
+    chmod -R 777 /data && \
     chown -R appuser:appuser /data
 
-# USER appuser
+USER appuser
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
