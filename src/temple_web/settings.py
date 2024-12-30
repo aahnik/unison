@@ -31,23 +31,23 @@ SECRET_KEY = MyDjS.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = MyDjS.DEBUG
 
-MY_LOCAL_IP = "192.168.1.12"
+
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    ".ngrok-free.app",
     "0.0.0.0",
 ]
-if MyDjS.DEBUG:
-    ALLOWED_HOSTS += [MY_LOCAL_IP]
+
+
 if MyDjS.MORE_ALLOWED_HOSTS:
     ALLOWED_HOSTS += MyDjS.MORE_ALLOWED_HOSTS
 # print(ALLOWED_HOSTS)
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
-    "https://*.ngrok-free.app/",
 ]
+for item in MyDjS.MORE_ALLOWED_HOSTS:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{item}")
 
 if MyDjS.PROD:
     ALLOWED_HOSTS.append(f".{MyDjS.PROD_DOMAIN}")
