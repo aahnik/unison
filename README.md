@@ -35,7 +35,7 @@ A modern and dynamic website for temple communities.
 | SECRET_KEY              | Django secret key for security                                    | your-secret-key-here       |
 | MORE_ALLOWED_HOSTS      | Additional allowed hosts (comma-separated IPs/domains)            | 139.59.38.218,139.59.38.219|
 | PROD_FILES_ROOT         | Root directory for production files                               | /var/www/                  |
-| PROD_DOMAIN            | Production domain name                                            | iskconbarasat.com          |
+| PROD_DOMAIN            | Deployment domain name                                            | whateverdomain.com          |
 | DEPLOYMENT_VERSION      | Version identifier for deployment                                 | TestingLocal-Tue-June-20-2023|
 | DEFAULT_FROM_EMAIL     | Default sender email address                                      | templeweb@email.com        |
 | EMAIL_HOST_USER        | SMTP server username                                              | templeweb@email.com        |
