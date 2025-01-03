@@ -27,7 +27,7 @@ def haps_item(request: HttpRequest, slug: str):
     return render(request, "haps/item.html", context=context)
 
 
-@login_required(login_url="/users/register")
+# @login_required(login_url="/users/register")
 def register_for_event(request: HttpRequest, slug: str):
     """Register for an event"""
     try:
